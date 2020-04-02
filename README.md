@@ -2,4 +2,4 @@
 
 ## Database Schema
 
-!(/images/DB\ Schema.pdf)
+![](/images/DB\ Schema.pdf)
