@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import axios from 'axios';
 import {Login} from './Login';
+import { SignUp } from './SignUp';
 
 class App extends React.Component {
 
@@ -57,22 +58,9 @@ class App extends React.Component {
 
   render(){
     return (
-      <div className="App">
-        <header className="App-header">
-          {/*     
-        <button onClick={this.reset}> Initialize DB </button>
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" value={this.state.number} onChange={this.handleChange}/>
-            <br/>
-            <input type="submit" value="Submit" />
-          </form>
-          <ul>
-            { this.state.values.map((value, i) => <li key={i}>{value.value}</li>) }
-          </ul>
-          */}
-          <Login />
-        </header>
-      </div>
+      <>
+        <SignUp/>
+      </>
     );
   }
 

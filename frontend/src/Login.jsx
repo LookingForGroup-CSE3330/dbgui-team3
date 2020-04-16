@@ -2,62 +2,74 @@ import React from 'react';
 
 export class Login extends React.Component{
     state = {
+        userName: '',
+        password: ''
+    }
 
-    };
-
-    render() {
+    render(){
         return(
-            <>
-                <div className="container-fluid">
-                <div className="jumbotron" style={{height: '95vh'}}>
-                    <div className="row justify-content-center">
-                    <div className="col-md-8">
-                        <div className="card" style={{margin: '5em', }}> 
-                        <div className="card-header" style={{ textAlign: "center" }}>
+            <div className="container">
+
+                    <div className="card">
+                        <div className="card-header text-center">
                             Welcome!
                         </div>
                         <div className="card-body">
-                            <div className="form-group row" style={{margin: '3em'}}>
-                            <label
-                                for="username"
-                                className="col-md-4 col-form-label text-md-right"
+                            <h5 className="card-title text-center">Login</h5>
+                            <form>
+                                <div className="form-group row">
+                                    <label htmlFor="userNameInput" className="col-2 col-form-label">Username</label>
+                                    <div className="col">
+                                        <input 
+                                            type="text"
+                                            className="form-control"
+                                            id="userNameInput"
+                                            name="userNameInput"
+                                            placeholder="Username"
+                                            value={this.state.userName}
+                                            onChange={e => this.setState({userName: e.target.value})}   
+                                        />
+                                    </div> 
+                                </div>
+                                <div className="form-group row">
+                                    <label htmlFor="passwordInput" className="col-2 col-form-label">Password</label>
+                                    <div className="col">
+                                        <input 
+                                            type="password"
+                                            className="form-control"
+                                            id="userNameInput"
+                                            name="userNameInput"
+                                            placeholder="Password"
+                                            value={this.state.password}
+                                            onChange={e => this.setState({password: e.target.value})}   
+                                        />
+                                    </div> 
+                                </div>
+                                <div className="form-group row">
+                                    <div className="col">
+                                        <button 
+                                            type="button" 
+                                            className="btn btn-primary btn-block"
+                                            id="loginButton"
+                                            name="loginButton"
+                                        >
+                                            Sign In
+                                        </button>
+                                    </div>  
+                                </div>
+                            </form>
+                            <hr/>
+                            <button 
+                                type="button" 
+                                className="btn btn-secondary btn-block"
+                                id="createAccountButton"
+                                name="createAccountButton"
                             >
-                                Username
-                            </label>
-                            <div className="col-md-6">
-                                <input
-                                type="username"
-                                id="username"
-                                className="form-control"
-                                name="username"
-                                required
-                                />
-                            </div>
-
-                            <label
-                                for="password"
-                                className="col-md-4 col-form-label text-md-right"
-                            >
-                                Password
-                            </label>
-                            <div className="col-md-6">
-                                <input
-                                type="password"
-                                id="password"
-                                className="form-control"
-                                name="password"
-                                required
-                                />
-                            </div>
-                            </div>
-                        </div>
+                                Don't have an account? Sign up here!
+                            </button>
                         </div>
                     </div>
-                    </div>
-                </div>
-                </div>
-            </>
-
+            </div>
         )
     }
 }
