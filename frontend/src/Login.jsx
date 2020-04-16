@@ -27,7 +27,8 @@ export class Login extends React.Component{
                                             name="userNameInput"
                                             placeholder="Username"
                                             value={this.state.userName}
-                                            onChange={e => this.setState({userName: e.target.value})}   
+                                            onChange={e => this.setState({userName: e.target.value})}
+                                            required
                                         />
                                     </div> 
                                 </div>
@@ -41,14 +42,15 @@ export class Login extends React.Component{
                                             name="userNameInput"
                                             placeholder="Password"
                                             value={this.state.password}
-                                            onChange={e => this.setState({password: e.target.value})}   
+                                            onChange={e => this.setState({password: e.target.value})}
+                                            required  
                                         />
                                     </div> 
                                 </div>
                                 <div className="form-group row">
                                     <div className="col">
                                         <button 
-                                            type="button" 
+                                            type="submit" 
                                             className="btn btn-primary btn-block"
                                             id="loginButton"
                                             name="loginButton"
