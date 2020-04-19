@@ -8,6 +8,7 @@ CREATE TABLE `db`.`users` (
   `profile_img` VARCHAR(45) NULL,
   `email` VARCHAR(45) NULL,
   `credentials` VARCHAR(45) NULL,
+  'role' VARCHAR(45) NOT NULL,
   PRIMARY KEY (`usr_id`));
 
 ALTER TABLE `db`.`users` 
