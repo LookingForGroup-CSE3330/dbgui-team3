@@ -56,6 +56,14 @@ module.exports = connection
 const hello_world_router = require('./routes/hello_world')
 app.use('/helloworld', hello_world_router)
 
+//connecting the express object to listen on a particular port as defined in the config object.
+app.listen(config.port, config.host, (e) => {
+  if (e) {
+    throw new Error('Internal Server Error');
+  }
+  logger.info(`${config.name} running on ${config.host}:${config.port}`);
+});
+
 // Testing tables---------------------------------------------------------------
 
 // router.get('/user-table', (req, res) => {
@@ -145,11 +153,3 @@ app.use('/helloworld', hello_world_router)
 // });
 
 // app.use('/api', router);
-
-//connecting the express object to listen on a particular port as defined in the config object.
-app.listen(config.port, config.host, (e) => {
-  if (e) {
-    throw new Error('Internal Server Error');
-  }
-  logger.info(`${config.name} running on ${config.host}:${config.port}`);
-});
