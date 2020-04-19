@@ -19,7 +19,7 @@ var connection = mysql.createConnection({
 const config = {
   name: 'sample-express-app',
   port: 8000,
-  host: '0.0.0.0',
+  host: '0.0.0.0',    //localhost for now
 };
 
 //create the express.js object

@@ -10,6 +10,9 @@ CREATE TABLE `db`.`users` (
   `credentials` VARCHAR(45) NULL,
   PRIMARY KEY (`usr_id`));
 
+ALTER TABLE `db`.`users` 
+CHANGE COLUMN `usr_id` `usr_id` INT(11) NOT NULL AUTO_INCREMENT ;
+
 INSERT INTO `db`.`users` (`usr_id`, `username`, `password_p`, `about_me`) VALUES ('1111', 'username1111', 'password1111', 'this profile is for user11111');
 INSERT INTO `db`.`users` (`usr_id`, `username`, `password_p`, `about_me`) VALUES ('2222', 'username2222', 'password2222', 'this profile is for user2222');
 INSERT INTO `db`.`users` (`usr_id`, `username`, `password_p`, `about_me`) VALUES ('3333', 'usernamae3333', 'password3333', 'this profile is for user3333');
@@ -26,6 +29,9 @@ CREATE TABLE `db`.`roles` (
   `role_name` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`role_id`));
 
+ALTER TABLE `db`.`roles` 
+CHANGE COLUMN `role_id` `role_id` INT(11) NOT NULL AUTO_INCREMENT ;
+
 INSERT INTO `db`.`roles` (`role_id`, `role_name`) VALUES ('1000', 'doctor');
 INSERT INTO `db`.`roles` (`role_id`, `role_name`) VALUES ('2000', 'general_user');
 INSERT INTO `db`.`roles` (`role_id`, `role_name`) VALUES ('3000', 'admin');
@@ -35,6 +41,12 @@ CREATE TABLE `db`.`user_roles` (
   `usr_id` INT NOT NULL,
   `role_id` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`user_role_id`));
+
+ALTER TABLE `db`.`user_roles` 
+CHANGE COLUMN `user_role_id` `user_role_id` INT(11) NOT NULL AUTO_INCREMENT ;
+
+ALTER TABLE `db`.`user_roles` 
+CHANGE COLUMN `role_id` `role_id` INT NOT NULL ;
 
 INSERT INTO `db`.`user_roles` (`user_role_id`, `usr_id`, `role_id`) VALUES ('1', '1111', '2000');
 INSERT INTO `db`.`user_roles` (`user_role_id`, `usr_id`, `role_id`) VALUES ('2', '2222', '2000');
@@ -57,6 +69,9 @@ CREATE TABLE `db`.`posts` (
   `tags` VARCHAR(45) NULL,
   PRIMARY KEY (`post_id`));
 
+ALTER TABLE `db`.`posts` 
+CHANGE COLUMN `post_id` `post_id` INT(11) NOT NULL AUTO_INCREMENT ;
+
 INSERT INTO `db`.`posts` (`post_id`, `user_id`, `creation_date`, `viewCount`, `answer_count`, `question`) VALUES ('1', '1111', '1/31/2000', '5', '2', 'This is a sample question, question 1?');
 INSERT INTO `db`.`posts` (`post_id`, `user_id`, `creation_date`, `viewCount`, `answer_count`, `question`) VALUES ('2', '2222', '4/20/2020', '7', '3', 'This is a sample question. question2?');
 
@@ -67,6 +82,10 @@ CREATE TABLE `db`.`answers` (
   `date` VARCHAR(45) NULL,
   `answer` VARCHAR(600) NOT NULL,
   PRIMARY KEY (`answer_id`));
+
+ALTER TABLE `db`.`answers` 
+CHANGE COLUMN `answer_id` `answer_id` INT(11) NOT NULL AUTO_INCREMENT ;
+
 
 INSERT INTO `db`.`answers` (`answer_id`, `post_id`, `user_id`, `date`, `answer`) VALUES ('1', '1', '7777', '4/17/20', 'When you create a volume, it is stored within a directory on the Docker host. When you mount the volume into a container, this directory is what is mounted into the container. This is similar to the way that bind mounts work, except that volumes are managed by Docker and are isolated from the core functionality of the host machine1111');
 INSERT INTO `db`.`answers` (`answer_id`, `post_id`, `user_id`, `date`, `answer`) VALUES ('2', '1', '8888', '4/18/20', 'When you create a volume, it is stored within a directory on the Docker host. When you mount the volume into a container, this directory is what is mounted into the container. This is similar to the way that bind mounts work, except that volumes are managed by Docker and are isolated from the core functionality of the host machine2222');
@@ -79,6 +98,9 @@ CREATE TABLE `db`.`tags` (
   `tag_name` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`tag_id`));
 
+ALTER TABLE `db`.`tags` 
+CHANGE COLUMN `tag_id` `tag_id` INT(11) NOT NULL AUTO_INCREMENT ;
+
 INSERT INTO `db`.`tags` (`tag_id`, `tag_name`) VALUES ('1', 'tagA');
 INSERT INTO `db`.`tags` (`tag_id`, `tag_name`) VALUES ('2', 'tagB');
 INSERT INTO `db`.`tags` (`tag_id`, `tag_name`) VALUES ('3', 'tagC');
@@ -89,6 +111,9 @@ CREATE TABLE `db`.`post_tags` (
   `post_id` INT NOT NULL,
   `tag_id` INT NOT NULL,
   PRIMARY KEY (`id`));
+
+ALTER TABLE `db`.`post_tags` 
+CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ;
 
 INSERT INTO `db`.`post_tags` (`id`, `post_id`, `tag_id`) VALUES ('1', '1', '1');
 INSERT INTO `db`.`post_tags` (`id`, `post_id`, `tag_id`) VALUES ('2', '2', '2');
