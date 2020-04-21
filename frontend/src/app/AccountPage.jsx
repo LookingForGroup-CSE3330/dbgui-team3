@@ -9,7 +9,7 @@ export class AccountPage extends React.Component {
   state = {
     account: []
   };
-
+/*
   componentDidMount() {
     let usr_id = this.props.match.params.usr_id; 
     if(usr_id){
@@ -20,7 +20,18 @@ export class AccountPage extends React.Component {
         this.setState({account});
       });
     }
+    console.log(this.state.account);
   }
+*/
+
+componentDidMount(){
+  this.accountRepository.getAccounts()
+  .then(sample => {
+    console.log(sample);
+  });
+}
+
+
 
   render() {
     return (

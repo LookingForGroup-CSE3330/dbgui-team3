@@ -53,8 +53,8 @@ app.get('/', (req, res) => {
 
 module.exports = connection
 
-const hello_world_router = require('./routes/hello_world')
-app.use('/helloworld', hello_world_router)
+let hello_world_router = require('./routes/hello_world')
+
 
 //connecting the express object to listen on a particular port as defined in the config object.
 app.listen(config.port, config.host, (e) => {
@@ -63,6 +63,8 @@ app.listen(config.port, config.host, (e) => {
   }
   logger.info(`${config.name} running on ${config.host}:${config.port}`);
 });
+
+app.use(hello_world_router)
 
 // Testing tables---------------------------------------------------------------
 

@@ -3,9 +3,9 @@ import axios from 'axios';
 export class AccountRepository{
     url = 'http://localhost:8000';
 
-    getAccount(usr_id){
+    getAccounts(){
         return new Promise((resolve, reject) =>{
-            axios.get(`${this.url}/${usr_id}`)
+            axios.get(`${this.url}/user`)
             .then(x => resolve(x.data))
             .catch(x => {
                 alert(x);
