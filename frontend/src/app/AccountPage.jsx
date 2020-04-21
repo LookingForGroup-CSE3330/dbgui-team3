@@ -1,9 +1,26 @@
 import React from "react";
 import {Navigation} from './Navigation';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {AccountRepository} from './../api/accountRepository';
 
 export class AccountPage extends React.Component {
-  state = {};
+  accountRepository = new AccountRepository();
+
+  state = {
+    account: []
+  };
+
+  componentDidMount() {
+    let usr_id = this.props.match.params.usr_id; 
+    if(usr_id){
+      console.log(usr_id);
+      this.accountRepository.getAccount(usr_id)
+      .then(account =>{
+        console.log(account);
+        this.setState({account});
+      });
+    }
+  }
 
   render() {
     return (
@@ -32,12 +49,9 @@ export class AccountPage extends React.Component {
                         <li className="list-group-item">Other?</li>
                       </ul>
                       <div className="card-body">
-                        <a href="#" class="card-link">
+                        <p>
                           Edit Profile
-                        </a>
-                        <a href="#" className="card-link">
-                          Another link
-                        </a>
+                        </p>
                       </div>e
                     </li>
                   </ul>
@@ -56,9 +70,9 @@ export class AccountPage extends React.Component {
                       <div className="row">
                         <div className="col-xs-10 col-md-11">
                           <div>
-                            <a href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html">
+                            <h4>
                               Here is a medical question that this profile asked...
-                            </a>
+                            </h4>
                           </div>
                           <div className="comment-text">Lorem ipsum ........</div>
                           <div className="action">
@@ -78,9 +92,9 @@ export class AccountPage extends React.Component {
                       <div className="row">
                         <div className="col-xs-10 col-md-11">
                           <div>
-                            <a href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html">
+                            <h4>
                               Here is a medical question that this profile asked...
-                            </a>
+                            </h4>
                           </div>
                           <div className="comment-text">Lorem ipsum ........</div>
                           <div className="action">

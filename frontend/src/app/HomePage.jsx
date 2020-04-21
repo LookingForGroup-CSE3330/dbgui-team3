@@ -1,7 +1,17 @@
 import React from "react";
+import {AccountRepository} from './../api/accountRepository';
 
 export class HomePage extends React.Component {
   state = {};
+
+  accountRepository = new AccountRepository();
+  
+  componentDidMount(){
+    this.accountRepository.test()
+    .then(sample => {
+      console.log(sample);
+    });
+  }
 
   render() {
     return (
@@ -20,9 +30,9 @@ export class HomePage extends React.Component {
                 <div className="row">
                   <div className="col-xs-10 col-md-11">
                     <div>
-                      <a href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html">
+                      <h4>
                         Here is a medical question that this profile asked...
-                      </a>
+                      </h4>
                     </div>
                     <div className="comment-text">Lorem ipsum ........</div>
                     <div className="action">
@@ -42,9 +52,9 @@ export class HomePage extends React.Component {
                 <div className="row">
                   <div className="col-xs-10 col-md-11">
                     <div>
-                      <a href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html">
+                      <h4>
                         Here is a medical question that this profile asked...
-                      </a>
+                      </h4>
                     </div>
                     <div className="comment-text">Lorem ipsum ........</div>
                     <div className="action">

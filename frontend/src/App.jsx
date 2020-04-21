@@ -1,7 +1,50 @@
 import React from 'react';
+import axios from 'axios';
+import {Login} from './app/Login';
+import {HomePage} from './app/HomePage';
+import {AccountPage} from './app/AccountPage';
+import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
+import {ROUTES} from './routes.js';
+
+class App extends React.Component {
+  state = {}
+
+  
+  // tell app to fetch values from db on first load (if initialized)
+
+  // fetches vals of db via GET request
+  /*
+  fetchVals = () => {
+    axios.get('http://localhost:8000/values').then(
+      res => {
+        const values = res.data;
+        console.log(values.data);
+        this.setState({ values: values.data });
+    });
+  }
+  */
+
+
+  render(){
+    return(
+      <>
+      <Router>
+        <Switch>
+          { ROUTES.map((route, index) => <Route key={index} {...route} />)}
+        </Switch>
+      </Router>
+      </>
+    )
+  }
+}
+export default App;
+
+/*
+import React from 'react';
 import './App.css';
 import axios from 'axios';
 import {Login} from './app/Login';
+import {HomePage} from './app/HomePage';
 
 class App extends React.Component {
 
@@ -58,7 +101,7 @@ class App extends React.Component {
   render(){
     return (
       <>
-        <Login/>
+        <HomePage/>
       </>
     );
   }
@@ -67,3 +110,4 @@ class App extends React.Component {
 }
 
 export default App;
+*/
