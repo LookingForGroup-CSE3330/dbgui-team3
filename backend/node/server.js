@@ -4,6 +4,8 @@ const cors = require('cors');
 const mysql = require('mysql');
 const { log, ExpressAPILogMiddleware } = require('@rama41222/node-logger');
 
+// var router = express.Router();
+
 //mysql connection
 var connection = mysql.createConnection({
   host: 'backend-db',
@@ -44,10 +46,10 @@ app.get('/', (req, res) => {
   res.status(200).send('Go to 0.0.0.0:3000.');
 });
 
-router.use((req, res, next) => {
-   console.log('router being used...')
-   next()
-})
+// router.use((req, res, next) => {
+//   console.log('router being used...')
+//   next()
+// })
 
 module.exports = connection
 
@@ -61,34 +63,6 @@ app.listen(config.port, config.host, (e) => {
   }
   logger.info(`${config.name} running on ${config.host}:${config.port}`);
 });
-
-
-//the api goes here
-//CREATING AN ACCOUNT 
-router.post('/users/createaccount', function (req, res) { //patients, doctors, admin
-  let sql = 'INSERT INTO users (username, password_p, about_me, up_votes, down_votes, profile_img, email, credentials, role), VALUES (\'${req.query.username}\', ${req.query.password_p}, ${req.query.role})';
-    if (err) throw err;
-    res.end(JSON.stringify(result)); // Result in JSON format
-  });
-});
-
-//GET patients
-router.get('/users/patients', function (req, res) { //patients, doctors, admin
-  con.query("SELECT * FROM users WHERE role = patient", function (err, result, fields) {
-    if (err) throw err;
-    res.end(JSON.stringify(result)); // Result in JSON format
-  });
-});
-
-//GET doctors
-router.get('/users/doctors', function (req, res) { //patients, doctors, admin
-  con.query("SELECT * FROM users WHERE role = doctor", function (err, result, fields) {
-    if (err) throw err;
-    res.end(JSON.stringify(result)); // Result in JSON format
-  });
-});
-
-
 
 // Testing tables---------------------------------------------------------------
 
