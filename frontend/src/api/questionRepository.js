@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-export class AccountRepository{
+export class QuestionRepository{
     url = 'http://localhost:8000';
 
-    getAccounts(){
+    getPosts(){
         return new Promise((resolve, reject) =>{
-            axios.get(`${this.url}/users/get`)
+            axios.get(`${this.url}/posts/get`)
             .then(x => resolve(x.data))
             .catch(x => {
                 alert(x);
@@ -14,26 +14,14 @@ export class AccountRepository{
         })
     }
 
-    getAccount(username){
+    getPost(username){
         return new Promise((resolve, reject) =>{
-            axios.get(`${this.url}/users/get/${username}`)
+            axios.get(`${this.url}/posts/get/${username}`)
             .then(x => resolve(x.data))
             .catch(x => {
                 alert(x);
                 reject(x);  
             })
-        })
+        })       
     }
-
-    test(){
-        return new Promise((resolve, reject) =>{
-            axios.get(`${this.url}`)
-            .then(x => resolve(x.data))
-            .catch(x => {
-                alert(x);
-                reject(x);  
-            })
-        })
-    }
-    
 }

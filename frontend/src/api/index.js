@@ -1,3 +1,3 @@
 export * from './accountRepository';
-export * from './answersRepository';
-export * from './questionsRepository';
+export * from './answerRepository';
+export * from './questionRepository';

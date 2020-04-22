@@ -17,11 +17,14 @@ router.get('/users/get/:username', (req, res) => {
     })
 })
 router.get('/users/viewaccount/:username', (req, res) => {
-       connection.query('select * from db.users where db.users.username =  ${req.params.username}', (err, result, fields) => {
+       connection.query(`select * from db.users where db.users.username =  ${req.params.username}`, (err, result, fields) => {
         if(err) throw err
         res.send(JSON.stringify(result))   
     })  
+    
 })
+
+
 //create an account
 router.post('/users/createaccount/', (req, res) => {
   var sqlstmnt = `INSERT INTO db.users(username, password_p, about_me, up_votes, down_votes) VALUES (\'${req.params.password}\', \'${req.params.username}\)`
