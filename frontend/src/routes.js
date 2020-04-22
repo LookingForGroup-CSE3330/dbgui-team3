@@ -6,7 +6,8 @@ import {HomePage} from './app/HomePage';
 export const ROUTES = [
     //{path: '', component: },
     //{path: '/:usr_id', component: AccountPage},
-    {path: '/user', component: AccountPage},
+    {path: '/cq', component: CreateQuestion},
+    {path: '/users/:username', component: AccountPage},
     {path: '/', component: HomePage}
 
 ]
