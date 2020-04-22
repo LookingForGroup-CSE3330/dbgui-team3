@@ -24,11 +24,14 @@ router.get('/users/viewaccount/:username', (req, res) => {
 })
 //create an account
 router.post('/users/createaccount/', (req, res) => {
-  var sqlstmnt = `INSERT INTO db.users(username, password_p, about_me, up_votes, down_votes) VALUES (\'${req.params.password}\', \'${req.params.username}\)`
-  res.send(req.params);
-    connection.query(sqlstmnt, function (err, result, fields) {
-        if (err) throw err;
-        res.end(JSON.stringify(result)); // Result in JSON format
+   var account = {
+        username: req.body.username,
+        password_p: req.body.user_id,
+        about_me: req.body.about_me,
+    }
+    connection.query('insert into db.users SET ?', account, (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
     })
 })
 //Delete a user
