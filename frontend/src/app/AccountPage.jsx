@@ -3,10 +3,12 @@ import {Navigation} from './Header';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import {AccountRepository} from './../api/accountRepository';
 import { QuestionRepository } from "../api/questionRepository";
+import { AnswerRepository } from "../api/answerRepository";
 
 export class AccountPage extends React.Component {
   accountRepository = new AccountRepository();
   questionRepository = new QuestionRepository();
+  answerRepository = new AnswerRepository();
 
   state = {
     account: [],
@@ -17,21 +19,19 @@ export class AccountPage extends React.Component {
 componentDidMount(){
   let username = this.props.match.params.username;
   if(username){
-    this.accountRepository.getAccounts()
+    this.accountRepository.getAccount(username)
     .then(result => {
-      console.log(result);
+      //console.log(result);
       this.setState({account: result});
     });
     
     this.questionRepository.getPost(username)
     .then(res =>{
-      console.log(res);
+      //console.log(res);
       this.setState({posts: res});
     })
-
   }
 }
-
 
 
   render() {
@@ -50,9 +50,11 @@ componentDidMount(){
                     <li className="list-group-item text-center">
                       <p style={{ fontWeight: "bold" }}>My Profile</p>
                     </li>
-                    <li className="list-group-item" style={{ height: "80vh" }}>
+                    {this.state.account.map(account => (
+                    <li className="list-group-item" style={{ height: "80vh" }} key={account.usr_id}>
                       <div className="card-body">
-                        <h5 className="card-title">John Doe</h5>
+
+                        <h5 className="card-title">{account.username}</h5>
                         <p className="card-text">
                           Some quick example text to build on the card title and make
                           up the bulk of the card's content.
@@ -63,14 +65,17 @@ componentDidMount(){
                         <li className="list-group-item">Phone Number</li>
                         <li className="list-group-item">Other?</li>
                       </ul>
+                      
                       <div className="card-body">
                         <p>
                           Edit Profile
                         </p>
-                      </div>e
+                      </div>
                     </li>
+                    ))}
                   </ul>
                 </div>
+                
 
                 {/*Comments*/}
                 <div
@@ -81,7 +86,6 @@ componentDidMount(){
                     <li className="list-group-item text-center">
                       <p style={{ fontWeight: "bold" }}>My Questions</p>
                     </li>
-
                     {this.state.posts.map(post => (
                     <li className="list-group-item" key={post.post_id}>
                       <div className="row">
@@ -102,6 +106,7 @@ componentDidMount(){
                             </button>
                           </div>
                           <p>{post.creation_date}</p>
+                          <Link className="btn btn-link"  to="/">View Answer(s)</Link>
                         </div>
                       </div>
                     </li>                

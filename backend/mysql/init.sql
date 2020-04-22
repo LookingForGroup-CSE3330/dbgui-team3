@@ -72,8 +72,8 @@ CREATE TABLE `db`.`posts` (
 ALTER TABLE `db`.`posts` 
 CHANGE COLUMN `post_id` `post_id` INT(11) NOT NULL AUTO_INCREMENT ;
 
-INSERT INTO `db`.`posts` (`post_id`, `user_id`, `creation_date`, `viewCount`, `answer_count`, `question`) VALUES ('1', '1111', '1/31/2000', '5', '2', 'This is a sample question, question 1?');
-INSERT INTO `db`.`posts` (`post_id`, `user_id`, `creation_date`, `viewCount`, `answer_count`, `question`) VALUES ('2', '2222', '4/20/2020', '7', '3', 'This is a sample question. question2?');
+INSERT INTO `db`.`posts` (`post_id`, `user_id`, `creation_date`, `viewCount`, `answer_count`, `question`) VALUES ('1', '1111', '1/31/2000', '5', '2', 'sample question 1 How to know if cold or flu?');
+INSERT INTO `db`.`posts` (`post_id`, `user_id`, `creation_date`, `viewCount`, `answer_count`, `question`) VALUES ('2', '2222', '4/20/2020', '7', '3', 'sample question 2 Is my leg broken lmao?');
 
 CREATE TABLE `db`.`answers` (
   `answer_id` INT NOT NULL,
