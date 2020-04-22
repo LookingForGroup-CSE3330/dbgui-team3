@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export class AccountRepository{
     url = 'http://localhost:8000';
+    config = {};
 
     getAccounts(){
         return new Promise((resolve, reject) =>{
@@ -35,6 +36,17 @@ export class AccountRepository{
                 reject(x);  
             })
         })
+    }
+
+    login(loginData){
+        return new Promise((resolve, reject) => {
+            axios.post(`${this.url}/users/login`, loginData, this.config)
+                .then(x => resolve(x.data))
+                .catch(x => {
+                    alert("Wrong username or password");
+                    resolve({error: "Wrong username or password"});
+                })
+        });
     }
     
 }
