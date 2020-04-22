@@ -22,11 +22,11 @@ export class CreateQuestion extends React.Component {
                     </li>
                     <div className="form-group">
                         <label for="thequestion">Question</label>
-                        <textarea class="form-control" id="thequestion" rows="3"></textarea>
+                        <textarea className="form-control" id="thequestion" rows="3"></textarea>
                     </div>
                     <div className="form-group">
                         <label for="thetags">Tags</label>
-                        <input class="form-control" id="thetags"></input>
+                        <input className="form-control" id="thetags"></input>
                     </div>
                 </ul>
              </div>
