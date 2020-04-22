@@ -53,8 +53,8 @@ app.get('/', (req, res) => {
 
 module.exports = connection
 
-const hello_world_router = require('./routes/hello_world')
-app.use('/helloworld', hello_world_router)
+let hello_world_router = require('./routes/hello_world')
+
 
 const user_router = require('./routes/users')
 const post_router = require('./routes/posts')
@@ -72,4 +72,4 @@ app.listen(config.port, config.host, (e) => {
   logger.info(`${config.name} running on ${config.host}:${config.port}`);
 });
 
-// app.use(app.router)
+
