@@ -51,6 +51,7 @@ export class HomePage extends React.Component {
                         </button>
                       </div>
                       <p>{post.creation_date}</p>
+                      <Link className="btn btn-link"  to={'answers/' + post.post_id}>View Answer(s)</Link>
                     </div>
                   </div>
                 </li>                
