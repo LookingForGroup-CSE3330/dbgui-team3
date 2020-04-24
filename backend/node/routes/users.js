@@ -28,23 +28,53 @@ router.get('/users/viewaccount/:username', (req, res) => {
 
 //Signup (includes password hashing so we dont store plaintext passwords in the db)
 router.post('/users/signup/', (req, res) => {
-    bcrypt.hash(req.body.password_p, 0, (err, hash) => {
+    //check if username already exists
+    connection.query('select * from db.users where users.username = ?', req.body.username, (err, result) => {
         if(err) throw err
         else {
-            var account = {
-                username: req.body.username,
-                password_p: hash,
-                about_me: req.body.about_me,
-                profile_img: req.body.profile_img,
-                email: req.body.email,
-                credentials: req.body.credentials
+            if(result && result.length) {
+                console.log("username found.")
+                res.send("username already exists")
+            } else {
+                bcrypt.hash(req.body.password_p, 0, (err, hash) => {
+                    if(err) throw err
+                    else {
+                        var account = {
+                            username: req.body.username,
+                            password_p: hash,
+                            about_me: req.body.about_me,
+                            profile_img: req.body.profile_img,
+                            email: req.body.email,
+                            credentials: req.body.credentials
+                        }
+                        connection.query('insert into db.users SET ?', account, (err, result, fields) => {
+                            if(err) throw err
+                            res.send(JSON.stringify(result))
+                        })
+                    } //end else
+                })
             }
-            connection.query('insert into db.users SET ?', account, (err, result, fields) => {
-                if(err) throw err
-                res.send(JSON.stringify(result))
-            })
-        } //end else
+        }
     })
+
+
+    // bcrypt.hash(req.body.password_p, 0, (err, hash) => {
+    //     if(err) throw err
+    //     else {
+    //         var account = {
+    //             username: req.body.username,
+    //             password_p: hash,
+    //             about_me: req.body.about_me,
+    //             profile_img: req.body.profile_img,
+    //             email: req.body.email,
+    //             credentials: req.body.credentials
+    //         }
+    //         connection.query('insert into db.users SET ?', account, (err, result, fields) => {
+    //             if(err) throw err
+    //             res.send(JSON.stringify(result))
+    //         })
+    //     } //end else
+    // })
 })
 
 //Login: with JWT auth
