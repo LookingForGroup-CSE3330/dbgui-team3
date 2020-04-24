@@ -13,6 +13,10 @@ CREATE TABLE `db`.`users` (
 ALTER TABLE `db`.`users` 
 CHANGE COLUMN `usr_id` `usr_id` INT(11) NOT NULL AUTO_INCREMENT ;
 
+ALTER TABLE `db`.`users` 
+CHANGE COLUMN `password_p` `password_p` VARCHAR(100) NOT NULL ;
+
+
 INSERT INTO `db`.`users` (`usr_id`, `username`, `password_p`, `about_me`) VALUES ('1111', 'username1111', 'password1111', 'this profile is for user11111');
 INSERT INTO `db`.`users` (`usr_id`, `username`, `password_p`, `about_me`) VALUES ('2222', 'username2222', 'password2222', 'this profile is for user2222');
 INSERT INTO `db`.`users` (`usr_id`, `username`, `password_p`, `about_me`) VALUES ('3333', 'usernamae3333', 'password3333', 'this profile is for user3333');
