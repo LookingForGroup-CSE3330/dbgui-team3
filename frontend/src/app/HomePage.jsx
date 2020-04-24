@@ -1,15 +1,20 @@
 import React from "react";
 import {AccountRepository} from './../api/accountRepository';
+import {QuestionRepository} from './../api/questionRepository';
+import {Link} from 'react-router-dom';
 
 export class HomePage extends React.Component {
-  state = {};
+  state = {
+    posts: []
+  };
 
-  accountRepository = new AccountRepository();
+  questionRepository = new QuestionRepository();
   
   componentDidMount(){
-    this.accountRepository.test()
-    .then(sample => {
-      console.log(sample);
+    this.questionRepository.getPosts()
+    .then(posts => {
+      console.log(posts);
+      this.setState({posts});
     });
   }
 
@@ -24,51 +29,33 @@ export class HomePage extends React.Component {
           >
             <ul className="list-group">
               <li className="list-group-item text-center">
-                <p style={{ fontWeight: "bold" }}>My Questions</p>
+                <p style={{ fontWeight: "bold" }}>Site Questions</p>
               </li>
-              <li className="list-group-item">
-                <div className="row">
-                  <div className="col-xs-10 col-md-11">
-                    <div>
-                      <h4>
-                        Here is a medical question that this profile asked...
-                      </h4>
-                    </div>
-                    <div className="comment-text">Lorem ipsum ........</div>
-                    <div className="action">
-                      <button
-                        type="button"
-                        className="btn btn-primary btn-xs"
-                        title="Edit"
-                      >
-                        <span className="glyphicon glyphicon-pencil" />
-                      </button>
+              {this.state.posts.map(post => (
+                <li className="list-group-item" key={post.post_id}>
+                  <div className="row">
+                    <div className="col-xs-10 col-md-11">
+                      <div>
+                        <h4>
+                          {post.question}
+                        </h4>
+                      </div>
+                      <div className="comment-text">Lorem ipsum ........</div>
+                      <div className="action">
+                        <button
+                          type="button"
+                          className="btn btn-primary btn-xs"
+                          title="Edit"
+                        >
+                          <span className="glyphicon glyphicon-pencil" />
+                        </button>
+                      </div>
+                      <p>{post.creation_date}</p>
                     </div>
                   </div>
-                </div>
-              </li>
+                </li>                
+              ))}
 
-              <li className="list-group-item">
-                <div className="row">
-                  <div className="col-xs-10 col-md-11">
-                    <div>
-                      <h4>
-                        Here is a medical question that this profile asked...
-                      </h4>
-                    </div>
-                    <div className="comment-text">Lorem ipsum ........</div>
-                    <div className="action">
-                      <button
-                        type="button"
-                        className="btn btn-primary btn-xs"
-                        title="Edit"
-                      >
-                        <span className="glyphicon glyphicon-pencil" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </li>
             </ul>
           </div>
         </div>

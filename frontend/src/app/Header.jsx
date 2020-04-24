@@ -1,11 +1,21 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-export class Navigation extends React.Component {
+export class Header extends React.Component {
 
     render() {
         return(
             <>
+
+            <div className="container-fluid">
+                <nav className="navbar bg-info" style={{height: '5em'}}>
+                    <Link style={{color: 'white', fontSize: '2em'}} to="/">Medical OverFlow</Link>
+                    <Link className="btn btn-warning"  to="/cq">Ask Question</Link>
+                    <Link style={{color: 'white', fontSize: '1.5em'}} to="/users/username2222">Profile</Link>
+                </nav>
+            </div>
+
+            {/*}
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <a className="navbar-brand" href="#">
                     Medical Questions Site
@@ -42,7 +52,8 @@ export class Navigation extends React.Component {
                     </li>
                     </ul>
                 </div>
-                </nav>            
+                </nav>    
+        */}        
             </>
         )
     }
