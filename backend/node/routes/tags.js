@@ -16,6 +16,32 @@ router.get('/tags/getquestiontags/:post_id', (req, res) => {
     })
 })
 
+router.post('/tags/:tag', (req, res) => {
+	var tags = {
+		tag_id: req.params.tag_id
+		tag: req.params.tag
+	}  
+    connection.query('insert into db.tags = SET ?', tags, (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
+router.post('/tags/')
+
+
+
+router.post('/tags/:post_id/:tag_id', (req, res) => {
+   var tags {
+   		id: req.params.id
+   		post_id: req.params.post_id
+   		tag_id: req.params.post_id
+   }
+       connection.query('insert into db.post_tags = SET ?', tags, (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
 
 
 module.exports = router
