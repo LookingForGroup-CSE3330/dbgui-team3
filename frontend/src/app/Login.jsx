@@ -1,14 +1,43 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
+import { AccountRepository } from '../api/accountRepository';
 
 export class Login extends React.Component{
+
+    accountRepo = new AccountRepository();
+
     state = {
         userName: '',
-        password: ''
+        password: '',
+        loginSuccess: false
+    }
+
+    signIn() {
+        this.setState({loginSuccess: false});
+
+        /*var loginData = {
+            userName: this.state.userName,
+            password: this.state.password
+        }
+
+        this.accountRepo.login(loginData)
+            .then(x => {
+                if(x.error || x === "Wrong username or password") {
+                    this.setState({loginSuccess: false});
+                }
+                else {
+                    this.setState({loginSuccess: true});
+                    this.props.history.push({pathName: '/'});
+                }
+            })*/
+
+        this.setState({loginSuccess: true})
     }
 
     render(){
         return(
+            <>
+            {this.state.loginSuccess && <Redirect to='/' />}
             <div className="container">
                     <div className="card">
                         <div className="card-header text-center">
@@ -50,10 +79,11 @@ export class Login extends React.Component{
                                 <div className="form-group row">
                                     <div className="col">
                                         <button 
-                                            type="submit" 
+                                            type="sbutton" 
                                             className="btn btn-primary btn-block"
                                             id="loginButton"
                                             name="loginButton"
+                                            onClick={() => this.signIn()}
                                         >
                                             Sign In
                                         </button>
@@ -72,6 +102,7 @@ export class Login extends React.Component{
                         </div>
                     </div>
             </div>
+            </>
         )
     }
 }
