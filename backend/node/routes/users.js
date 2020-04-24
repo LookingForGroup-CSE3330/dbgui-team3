@@ -56,29 +56,36 @@ router.post('/users/signup/', (req, res) => {
             }
         }
     })
-
-
-    // bcrypt.hash(req.body.password_p, 0, (err, hash) => {
-    //     if(err) throw err
-    //     else {
-    //         var account = {
-    //             username: req.body.username,
-    //             password_p: hash,
-    //             about_me: req.body.about_me,
-    //             profile_img: req.body.profile_img,
-    //             email: req.body.email,
-    //             credentials: req.body.credentials
-    //         }
-    //         connection.query('insert into db.users SET ?', account, (err, result, fields) => {
-    //             if(err) throw err
-    //             res.send(JSON.stringify(result))
-    //         })
-    //     } //end else
-    // })
 })
 
 //Login: with JWT auth
+router.post('/users/login/', (req, res) => {
+    var username = req.body.username
+    var password = req.body.password_p    
 
+    connection.query('select * from db.users where users.username = ?', username, (err, result) => {
+        if(err) throw err
+        else {  
+            if(result && result.length) {
+                //username match
+                bcrypt.compare(password, result[0].password_p, (err, result2) => {
+                    if(err) res.status(401).send("authorization failed_error")
+                    if(result2) { 
+                        res.status(200).json({
+                            message: "Auth successful"  
+                        })
+                    }
+                    res.status(401).json({
+                        message: 'authorization failed. wrong password'
+                    })
+                })
+            } else {  
+                //no matching username. no logging in for u
+                res.status(401).send("authorization failed. no matching username")
+            }
+        }
+    })
+})
 
 
 //Delete a user
