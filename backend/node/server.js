@@ -56,15 +56,11 @@ module.exports = connection
 let hello_world_router = require('./routes/hello_world')
 
 
-const user_router = require('./routes/users')
-const post_router = require('./routes/posts')
-const answer_router = require('./routes/answers')
-const tag_router = require('./routes/tags')
+let user_router = require('./routes/users')
+let post_router = require('./routes/posts')
+let answer_router = require('./routes/answers')
+let tag_router = require('./routes/tags')
 
-app.use('/user', user_router)
-app.use('/post', post_router)
-app.use('/answer', answer_router)
-app.use('/tag', tag_router)
 
 //connecting the express object to listen on a particular port as defined in the config object.
 app.listen(config.port, config.host, (e) => {
@@ -74,4 +70,7 @@ app.listen(config.port, config.host, (e) => {
   logger.info(`${config.name} running on ${config.host}:${config.port}`);
 });
 
-
+app.use(user_router)
+app.use(post_router)
+app.use(answer_router)
+app.use(tag_router)

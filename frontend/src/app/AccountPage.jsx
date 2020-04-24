@@ -1,42 +1,46 @@
 import React from "react";
-import {Navigation} from './Navigation';
+import {Navigation} from './Header';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import {AccountRepository} from './../api/accountRepository';
+import { QuestionRepository } from "../api/questionRepository";
+import { AnswerRepository } from "../api/answerRepository";
 
 export class AccountPage extends React.Component {
   accountRepository = new AccountRepository();
+  questionRepository = new QuestionRepository();
+  answerRepository = new AnswerRepository();
 
   state = {
-    account: []
+    account: [],
+    posts: []
   };
-/*
-  componentDidMount() {
-    let usr_id = this.props.match.params.usr_id; 
-    if(usr_id){
-      console.log(usr_id);
-      this.accountRepository.getAccount(usr_id)
-      .then(account =>{
-        console.log(account);
-        this.setState({account});
-      });
-    }
-    console.log(this.state.account);
-  }
-*/
+
 
 componentDidMount(){
-  this.accountRepository.getAccounts()
-  .then(sample => {
-    console.log(sample);
-  });
+  let username = this.props.match.params.username;
+  if(username){
+    this.accountRepository.getAccount(username)
+    .then(result => {
+      //console.log(result);
+      this.setState({account: result});
+    });
+    
+    this.questionRepository.getPost(username)
+    .then(res =>{
+      //console.log(res);
+      this.setState({posts: res});
+    })
+  }
 }
-
 
 
   render() {
     return (
       <>     
       {/*Profile Part */}
+      {console.log("here")}
+      {console.log(this.state.account)}
+      {console.log(this.state.posts)}
       <div className="container-fluid">
                 <div
                   className="container"
@@ -46,9 +50,11 @@ componentDidMount(){
                     <li className="list-group-item text-center">
                       <p style={{ fontWeight: "bold" }}>My Profile</p>
                     </li>
-                    <li className="list-group-item" style={{ height: "80vh" }}>
+                    {this.state.account.map(account => (
+                    <li className="list-group-item" style={{ height: "80vh" }} key={account.usr_id}>
                       <div className="card-body">
-                        <h5 className="card-title">John Doe</h5>
+
+                        <h5 className="card-title">{account.username}</h5>
                         <p className="card-text">
                           Some quick example text to build on the card title and make
                           up the bulk of the card's content.
@@ -59,14 +65,17 @@ componentDidMount(){
                         <li className="list-group-item">Phone Number</li>
                         <li className="list-group-item">Other?</li>
                       </ul>
+                      
                       <div className="card-body">
                         <p>
                           Edit Profile
                         </p>
-                      </div>e
+                      </div>
                     </li>
+                    ))}
                   </ul>
                 </div>
+                
 
                 {/*Comments*/}
                 <div
@@ -77,12 +86,13 @@ componentDidMount(){
                     <li className="list-group-item text-center">
                       <p style={{ fontWeight: "bold" }}>My Questions</p>
                     </li>
-                    <li className="list-group-item">
+                    {this.state.posts.map(post => (
+                    <li className="list-group-item" key={post.post_id}>
                       <div className="row">
                         <div className="col-xs-10 col-md-11">
                           <div>
                             <h4>
-                              Here is a medical question that this profile asked...
+                              {post.question}
                             </h4>
                           </div>
                           <div className="comment-text">Lorem ipsum ........</div>
@@ -95,31 +105,13 @@ componentDidMount(){
                               <span className="glyphicon glyphicon-pencil" />
                             </button>
                           </div>
+                          <p>{post.creation_date}</p>
+                          <Link className="btn btn-link"  to="/">View Answer(s)</Link>
                         </div>
                       </div>
-                    </li>
-
-                    <li className="list-group-item">
-                      <div className="row">
-                        <div className="col-xs-10 col-md-11">
-                          <div>
-                            <h4>
-                              Here is a medical question that this profile asked...
-                            </h4>
-                          </div>
-                          <div className="comment-text">Lorem ipsum ........</div>
-                          <div className="action">
-                            <button
-                              type="button"
-                              className="btn btn-primary btn-xs"
-                              title="Edit"
-                            >
-                              <span className="glyphicon glyphicon-pencil" />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
+                    </li>                
+                    ))}
+  
                   </ul>
                 </div>
               </div>

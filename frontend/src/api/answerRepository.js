@@ -1,12 +1,11 @@
 import axios from 'axios';
 
-export class AccountRepository{
+export class AnswerRepository{
     url = 'http://localhost:8000';
-    config = {};
 
-    getAccounts(){
+    getAnswers(){
         return new Promise((resolve, reject) =>{
-            axios.get(`${this.url}/users/get`)
+            axios.get(`${this.url}/answers/get`)
             .then(x => resolve(x.data))
             .catch(x => {
                 alert(x);
@@ -15,9 +14,9 @@ export class AccountRepository{
         })
     }
 
-    getAccount(username){
+    getUsersAnswers(user_id){
         return new Promise((resolve, reject) =>{
-            axios.get(`${this.url}/users/get/${username}`)
+            axios.get(`${this.url}/answers/get/${user_id}`)
             .then(x => resolve(x.data))
             .catch(x => {
                 alert(x);
@@ -26,24 +25,15 @@ export class AccountRepository{
         })
     }
 
-
-    test(){
+    getAnswerForQuestion(post_id){
         return new Promise((resolve, reject) =>{
-            axios.get(`${this.url}`)
+            axios.get(`${this.url}/answers/get/${post_id}`)
             .then(x => resolve(x.data))
             .catch(x => {
                 alert(x);
                 reject(x);  
             })
         })
-    }
-
-    login(loginData){
-        return new Promise((resolve, reject) => {
-            axios.post(`${this.url}/users/login`, loginData, this.config)
-                .then(x => resolve(x.data))
-                .catch(x => resolve({error: "Wrong username or password"}));
-        });
     }
     
 }

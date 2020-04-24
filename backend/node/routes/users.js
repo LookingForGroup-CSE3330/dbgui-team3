@@ -17,8 +17,10 @@ router.get('/users/get/:username', (req, res) => {
         res.send(JSON.stringify(result)) 
     })
 })
+
+
 router.get('/users/viewaccount/:username', (req, res) => {
-       connection.query('select * from db.users where db.users.username =  ${req.params.username}', (err, result, fields) => {
+       connection.query(`select * from db.users where db.users.username =  ${req.params.username}`, (err, result, fields) => {
         if(err) throw err
         res.send(JSON.stringify(result))   
     })       
@@ -84,6 +86,7 @@ router.post('/users/login/', (req, res) => {
                 res.status(401).send("authorization failed. no matching username")
             }
         }
+
     })
 })
 
