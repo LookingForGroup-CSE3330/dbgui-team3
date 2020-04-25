@@ -1,6 +1,9 @@
 import React from 'react';
+import {BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
+import { AccountRepository } from '../api/accountRepository';
 
 export class SignUp extends React.Component{
+    accountRepo = new AccountRepository();
     constructor() {
         super();
         this.state = {
@@ -9,7 +12,7 @@ export class SignUp extends React.Component{
             email: '',
             about_me: '',
             credentials: '',
-            checked: false
+            checked: false,
         }
         this.handleCheck = this.handleCheck.bind(this)
     }
@@ -18,9 +21,28 @@ export class SignUp extends React.Component{
         this.setState({checked: !this.state.checked});
     }
 
+    onSubmit(){
+        let accountInfo = {
+            username: this.state.username,
+            password_p: this.state.password_p,
+            about_me: this.state.about_me,
+            email: this.state.email,
+            credentials: this.state.credentials
+        }
+
+        this.accountRepo.signUp(accountInfo)
+            .then(res => {
+                if(res == "username already exists"){
+                    alert("username already exists")
+                } else {
+                    this.setState({ redirect: '/login'})
+                }
+            })
+    }
+
     render(){
         const hiddenStuff = this.state.checked
-           ? <div className="col-md" id="credBox">
+           ? <div className="form-group" id="credBox">
                 <label htmlFor="credInput">Credentials</label>
                 <input 
                     type="text"
@@ -33,6 +55,10 @@ export class SignUp extends React.Component{
                 />
             </div> 
             : null;
+            
+            if(this.state.redirect) {
+                return <Redirect to={this.state.redirect} />
+            }
 
         return(
             <div className="container">
@@ -87,7 +113,13 @@ export class SignUp extends React.Component{
                             <div className="form-group">
                                 <label htmlFor="aboutInput">About Me</label>
                                 <textarea 
-                                    name="aboutInput" id="aboutInput" className="form-control"></textarea>
+                                    name="aboutInput" 
+                                    id="aboutInput" 
+                                    className="form-control"
+                                    value={this.state.about_me}
+                                    onChange={e => this.setState({about_me: e.target.value})}
+                                    >
+                                </textarea>
                             </div>
                             <div className="form-group">
                                     <div className="form-check">
