@@ -19,18 +19,25 @@ export class CreateQuestion extends React.Component {
     }
 
     onTagAdd(){
-
+        if(!this.state.tags.includes(this.state.tag)){
+            this.setState({tags: [...this.state.tags, this.state.tag]});
+        }
+        else{
+            alert("You already added that tag!")
+        }
+        console.log("Current tags listed below");
+        console.log(this.state.tags);
     }
 
-
     onQuestionAdd(){
-        var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         var tempDate = new Date();
-        var theDate = months[tempDate.getMonth() +1] + " " + tempDate.getDate() + ", " + tempDate.getFullYear();
-        this.setState({date: theDate});
+        var theDate = tempDate.getMonth() +1 + "/" + tempDate.getDate() + "/" + tempDate.getFullYear();
 
         if(this.state.question.length >= 10){
-            let newquestion = new Question();
+            let newquestion = new Question(2222, theDate, 0, 0, this.state.question);
+            console.log("QUetion to be posted here")
+            console.log(newquestion);
+            this.questionRepository.postQuestion(newquestion);
         }
 
     }
@@ -45,7 +52,7 @@ export class CreateQuestion extends React.Component {
                         <h3 style={{ fontWeight: "bold" }}>Your Question</h3>
                     </li>
                     <div className="form-group">
-                        <label for="thequestion">Question</label>
+                        <label htmlFor="thequestion">Question</label>
                         <textarea 
                         className="form-control" 
                         id="thequestion" 
@@ -55,7 +62,7 @@ export class CreateQuestion extends React.Component {
                          />
                     </div>
                     <div className="form-group">
-                        <label for="thetags">Tags</label>
+                        <label htmlFor="thetags">Tags</label>
                         <input className="form-control" id="thetags" value={this.state.tag} onChange={e =>this.setState({tag: e.target.value})}></input>
                         <button
                         type="button"
@@ -68,7 +75,7 @@ export class CreateQuestion extends React.Component {
                     <button
                     type="button"
                     className="btn btn-success mb-2"
-                    onClick={() => this.onTagAdd()}
+                    onClick={() => this.onQuestionAdd()}
                     >Submit
                     </button>
                 </ul>

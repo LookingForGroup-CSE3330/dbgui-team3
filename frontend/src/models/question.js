@@ -1,9 +1,9 @@
 export default class Question {
-    constructor(id, user_id, date, tags, question){
-        this.id = id;
+    constructor(user_id, creation_date, viewCount, answer_count, question){
         this.user_id = user_id;
-        this.date = date;
-        this.tags = tags;
+        this.creation_date = creation_date;
+        this.viewCount = viewCount;
+        this.answer_count = answer_count;
         this.question = question;
     }
 }

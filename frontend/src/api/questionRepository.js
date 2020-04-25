@@ -25,6 +25,17 @@ export class QuestionRepository{
         })       
     }
 
+    getPostByPostId(post_id){
+        return new Promise((resolve, reject) =>{
+            axios.get(`${this.url}/posts/getbyid/${post_id}`)
+            .then(x => resolve(x.data))
+            .catch(x => {
+                alert(x);
+                reject(x);  
+            })
+        })       
+    }
+
     postQuestion(question){
         return new Promise((resolve, reject) => {
             axios.post(`${this.url}/posts/post`, {
