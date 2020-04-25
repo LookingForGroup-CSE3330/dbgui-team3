@@ -61,7 +61,7 @@ router.post('/users/signup/', (req, res) => {
 })
 
 //Login: with JWT auth
-router.post('/users/login/', (req, res) => {
+router.post('/users/login/auth', (req, res) => {
     var username = req.body.username
     var password = req.body.password_p    
 

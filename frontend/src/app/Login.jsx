@@ -12,9 +12,14 @@ export class Login extends React.Component{
     }
 
     signIn() {
-        this.accountRepo.login(this.state)
+        let loginData = {
+            username: this.state.userName,
+            password_p: this.state.password_p
+        };
+
+        this.accountRepo.login(loginData)
             .then(x => {
-                
+                alert("logged in")
                 this.setState({ redirect: '/' });
             })
 
