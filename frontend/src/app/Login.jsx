@@ -62,11 +62,11 @@ export class Login extends React.Component{
                                         <input 
                                             type="password"
                                             className="form-control"
-                                            id="userNameInput"
-                                            name="userNameInput"
+                                            id="passwordInput"
+                                            name="passwordInput"
                                             placeholder="Password"
-                                            value={this.state.password}
-                                            onChange={e => this.setState({password: e.target.value})}
+                                            value={this.state.password_p}
+                                            onChange={e => this.setState({password_p: e.target.value})}
                                             required  
                                         />
                                     </div> 
@@ -74,7 +74,7 @@ export class Login extends React.Component{
                                 <div className="form-group row">
                                     <div className="col">
                                         <button 
-                                            type="submit" 
+                                            type="button" 
                                             className="btn btn-primary btn-block"
                                             id="loginButton"
                                             name="loginButton"

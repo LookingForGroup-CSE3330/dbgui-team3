@@ -40,7 +40,7 @@ export class AccountRepository{
 
     login(loginData){
         return new Promise((resolve, reject) => {
-            axios.post(`${this.url}/users/login/auth`, loginData)
+            axios.post(`${this.url}/users/login/`, loginData)
                 .then(x => resolve(x.data))
                 .catch(x => {
                     alert(x);
