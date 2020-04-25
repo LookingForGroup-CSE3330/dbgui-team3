@@ -45,5 +45,16 @@ export class AccountRepository{
                 .catch(x => resolve({error: "Wrong username or password"}));
         });
     }
+
+    signUp(formData){
+        return new Promise((resolve, reject) => {
+            axios.post(`${this.url}/users/signUp/`, formData)
+                .then(x => resolve(x.data))
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        });
+    }
     
 }

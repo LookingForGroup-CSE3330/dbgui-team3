@@ -2,15 +2,16 @@ import React from 'react';
 
 export class SignUp extends React.Component{
     state = {
-        userName: '',
-        password: '',
+        username: '',
+        password_p: '',
         firstName: '',
         lastName: '',
         age: '',
         gender: '',
         isDoctor: 0,
         email: '',
-        phoneNumber: ''
+        phoneNumber: '',
+        about_me: ''
     }
 
     render(){

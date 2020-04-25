@@ -91,14 +91,14 @@ export class Login extends React.Component{
                                 </div>
                             </form>
                             <hr/>
-                            <button 
-                                type="button" 
+                            <Link 
+                                to={'signUp'}
                                 className="btn btn-secondary btn-block"
-                                id="createAccountButton"
+                                id="creatAccountButton"
                                 name="createAccountButton"
                             >
-                                Don't have an account? Sign up here!
-                            </button>
+                                Don't have an account? Sign up here! 
+                            </Link>
                         </div>
                     </div>
             </div>
