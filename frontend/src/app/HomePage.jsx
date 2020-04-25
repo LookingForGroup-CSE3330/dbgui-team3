@@ -40,7 +40,6 @@ export class HomePage extends React.Component {
                           {post.question}
                         </h4>
                       </div>
-                      <div className="comment-text">Lorem ipsum ........</div>
                       <div className="action">
                         <button
                           type="button"

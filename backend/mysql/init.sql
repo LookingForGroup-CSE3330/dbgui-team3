@@ -18,7 +18,7 @@ CHANGE COLUMN `password_p` `password_p` VARCHAR(100) NOT NULL ;
 
 
 INSERT INTO `db`.`users` (`usr_id`, `username`, `password_p`, `about_me`) VALUES ('1111', 'username1111', 'password1111', 'this profile is for user11111');
-INSERT INTO `db`.`users` (`usr_id`, `username`, `password_p`, `about_me`) VALUES ('2222', 'username2222', 'password2222', 'this profile is for user2222');
+INSERT INTO `db`.`users` (`usr_id`, `username`, `password_p`, `about_me`, `email`) VALUES ('2222', 'username2222', 'password2222', 'this profile is for user2222', 'user2222@fakeemail.com');
 INSERT INTO `db`.`users` (`usr_id`, `username`, `password_p`, `about_me`) VALUES ('3333', 'usernamae3333', 'password3333', 'this profile is for user3333');
 INSERT INTO `db`.`users` (`usr_id`, `username`, `password_p`, `about_me`) VALUES ('4444', 'usrname4444', 'password4444', 'this profile is for user4444');
 INSERT INTO `db`.`users` (`usr_id`, `username`, `password_p`, `about_me`) VALUES ('5555', 'username5555', 'password5555', 'this profile is for user5555');
@@ -76,8 +76,9 @@ CREATE TABLE `db`.`posts` (
 ALTER TABLE `db`.`posts` 
 CHANGE COLUMN `post_id` `post_id` INT(11) NOT NULL AUTO_INCREMENT ;
 
-INSERT INTO `db`.`posts` (`post_id`, `user_id`, `creation_date`, `viewCount`, `answer_count`, `question`) VALUES ('1', '1111', '1/31/2000', '5', '2', 'sample question 1 How to know if cold or flu?');
-INSERT INTO `db`.`posts` (`post_id`, `user_id`, `creation_date`, `viewCount`, `answer_count`, `question`) VALUES ('2', '2222', '4/20/2020', '7', '3', 'sample question 2 Is my leg broken lmao?');
+INSERT INTO `db`.`posts` (`post_id`, `user_id`, `creation_date`, `viewCount`, `answer_count`, `question`) VALUES ('1', '1111', '1/31/2000', '5', '2', 'How to know if cold or flu?');
+INSERT INTO `db`.`posts` (`post_id`, `user_id`, `creation_date`, `viewCount`, `answer_count`, `question`) VALUES ('2', '2222', '4/20/2020', '7', '3', 'Is my leg broken lmao?');
+INSERT INTO `db`.`posts` (`post_id`, `user_id`, `creation_date`, `viewCount`, `answer_count`, `question`) VALUES ('3', '2222', '4/23/2020', '7', '3', 'Should i go to the doctor if...');
 
 CREATE TABLE `db`.`answers` (
   `answer_id` INT NOT NULL,

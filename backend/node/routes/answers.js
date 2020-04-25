@@ -30,7 +30,7 @@ router.get('/answers/get/:user_id',(req, res) => {
 //POST
 router.post('/answers/post/post_answer', (req, res) => {
     var answer = {
-        answer_id: req.body.answer_id,
+        //answer_id: req.body.answer_id,
         post_id: req.body.post_id,
         user_id: req.body.user_id,
         date: req.body.date,

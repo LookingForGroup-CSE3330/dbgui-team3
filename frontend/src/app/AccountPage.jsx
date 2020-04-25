@@ -1,6 +1,5 @@
 import React from "react";
-import {Navigation} from './Header';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {AccountRepository} from './../api/accountRepository';
 import { QuestionRepository } from "../api/questionRepository";
 import { AnswerRepository } from "../api/answerRepository";
@@ -94,7 +93,6 @@ componentDidMount(){
                               {post.question}
                             </h4>
                           </div>
-                          <div className="comment-text">Lorem ipsum ........</div>
                           <div className="action">
                             <button
                               type="button"
@@ -105,12 +103,11 @@ componentDidMount(){
                             </button>
                           </div>
                           <p>{post.creation_date}</p>
-                          <Link className="btn btn-link"  to="/">View Answer(s)</Link>
+                          <Link className="btn btn-link"  to={'../answers/' + post.post_id}>View Answer(s)</Link>
                         </div>
                       </div>
                     </li>                
                     ))}
-  
                   </ul>
                 </div>
               </div>

@@ -54,7 +54,6 @@ export class AnswerPage extends React.Component {
                               {answer.answer}
                             </p>
                           </div>
-                          <div className="comment-text">Lorem ipsum ........</div>
                           <div className="action">
                             <button
                               type="button"
@@ -71,7 +70,7 @@ export class AnswerPage extends React.Component {
                     ))}
                     {this.state.question.map(q => (
                     <li className="list-group-item " key={q.post_id}>
-                      <Link className="btn btn-link"  to={'answers/new/' + q.post_id}>Answer This Question</Link>
+                      <Link className="btn btn-link"  to={'new/' + q.post_id}>Answer This Question</Link>
                     </li>
                     ))}
   
