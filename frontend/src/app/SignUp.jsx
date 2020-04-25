@@ -1,16 +1,39 @@
 import React from 'react';
 
 export class SignUp extends React.Component{
-    state = {
-        username: '',
-        password_p: '',
-        email: '',
-        about_me: '',
-        credentials: ''
+    constructor() {
+        super();
+        this.state = {
+            username: '',
+            password_p: '',
+            email: '',
+            about_me: '',
+            credentials: '',
+            checked: false
+        }
+        this.handleCheck = this.handleCheck.bind(this)
+    }
+    
+    handleCheck(){
+        this.setState({checked: !this.state.checked});
     }
 
-
     render(){
+        const hiddenStuff = this.state.checked
+           ? <div className="col-md" id="credBox">
+                <label htmlFor="credInput">Credentials</label>
+                <input 
+                    type="text"
+                    name="credInput"
+                    id="credInput"
+                    placeholder="M.D. University of School"
+                    className="form-control"
+                    value={this.state.credentials}
+                    onChange={e => this.setState({credentials: e.target.value})}
+                />
+            </div> 
+            : null;
+
         return(
             <div className="container">
                 <div className="card">
@@ -73,20 +96,11 @@ export class SignUp extends React.Component{
                                             type="checkbox"
                                             id="isDoctor"
                                             name="isDoctor"
-                                        />
-                                        
-                                    </div>
-                                    <div className="col-md" id="credBox" style={{display: 'none'}}>
-                                        <label htmlFor="credInput"></label>
-                                        <input 
-                                            type="text"
-                                            name="credInput"
-                                            id="credInput"
-                                            placeholder="M.D. University of School"
-                                            value={this.state.credentials}
-                                            onChange={e => this.setState({credentials: e.target.value})}
+                                            checked={this.state.checked}
+                                            onChange={this.handleCheck}
                                         />
                                     </div>
+                                    { hiddenStuff }
                                 </div>
                             <hr/>
                             <div className="form-group row">
