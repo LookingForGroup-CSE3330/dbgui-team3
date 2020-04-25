@@ -65,7 +65,7 @@ router.post('/users/login/', (req, res) => {
     var username = req.body.username
     var password = req.body.password_p    
 
-    connection.query('select * from db.users where users.username = ?', username, (err, result) => {
+    connection.query('select * from db.users where users.username = ?', [username], (err, result) => {
         if(err) throw err
         else {  
             if(result && result.length) {

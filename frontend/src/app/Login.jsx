@@ -8,36 +8,26 @@ export class Login extends React.Component{
 
     state = {
         userName: '',
-        password: '',
-        loginSuccess: false
+        password_p: '',
     }
 
     signIn() {
-        this.setState({loginSuccess: false});
-
-        /*var loginData = {
-            userName: this.state.userName,
-            password: this.state.password
-        }
-
-        this.accountRepo.login(loginData)
+        this.accountRepo.login(this.state)
             .then(x => {
-                if(x.error || x === "Wrong username or password") {
-                    this.setState({loginSuccess: false});
-                }
-                else {
-                    this.setState({loginSuccess: true});
-                    this.props.history.push({pathName: '/'});
-                }
-            })*/
+                
+                this.setState({ redirect: '/' });
+            })
 
-        this.setState({loginSuccess: true})
+        
     }
 
     render(){
+        if(this.state.redirect){
+            return <Redirect to={ this.state.redirect } />
+        }
+
         return(
             <>
-            {this.state.loginSuccess && <Redirect to='/' />}
             <div className="container">
                     <div className="card">
                         <div className="card-header text-center">
@@ -79,7 +69,7 @@ export class Login extends React.Component{
                                 <div className="form-group row">
                                     <div className="col">
                                         <button 
-                                            type="sbutton" 
+                                            type="submit" 
                                             className="btn btn-primary btn-block"
                                             id="loginButton"
                                             name="loginButton"
