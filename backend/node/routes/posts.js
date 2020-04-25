@@ -17,7 +17,16 @@ router.get('/posts/get/:username', (req, res) => {
         if(err) throw err
         res.send(JSON.stringify(result))
     })
-})  
+})
+
+//get request for getting a single post (question) by its id? whenever you get the chance
+router.get('/posts/get/:post_id', (req, res) => {
+    var postid = req.param('post_id')
+    connection.query('select * from db.posts where post_id = ?', postid, (err,result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
 
 //POST
 router.post('/posts/post', (req, res) => {
