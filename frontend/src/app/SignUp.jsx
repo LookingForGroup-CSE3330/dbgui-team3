@@ -4,18 +4,17 @@ import { AccountRepository } from '../api/accountRepository';
 
 export class SignUp extends React.Component{
     accountRepo = new AccountRepository();
-    constructor() {
-        super();
-        this.state = {
-            username: '',
-            password_p: '',
-            email: '',
-            about_me: '',
-            credentials: '',
-            checked: false,
-        }
-        this.handleCheck = this.handleCheck.bind(this)
+
+    state = {
+        username: '',
+        password_p: '',
+        email: '',
+        about_me: '',
+        credentials: '',
+        checked: false,
     }
+
+    handleCheck = this.handleCheck.bind(this);
     
     handleCheck(){
         this.setState({checked: !this.state.checked});
@@ -31,12 +30,8 @@ export class SignUp extends React.Component{
         }
 
         this.accountRepo.signUp(accountInfo)
-            .then(res => {
-                if(res == "username already exists"){
-                    alert("username already exists")
-                } else {
-                    this.setState({ redirect: '/login'})
-                }
+            .then(x => {
+                this.setState({redirect: '/'})
             })
     }
 
@@ -138,10 +133,11 @@ export class SignUp extends React.Component{
                             <div className="form-group row">
                                 <div className="col">
                                     <button 
-                                        type="submit" 
+                                        type="button" 
                                         className="btn btn-primary btn-block"
                                         id="signUpButton"
                                         name="signUpButton"
+                                        onClick={() => this.onSubmit()}
                                     >
                                         Sign Up
                                     </button>
