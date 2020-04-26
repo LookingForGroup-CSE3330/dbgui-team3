@@ -20,12 +20,14 @@ export class Login extends React.Component{
 
         this.accountRepo.login(loginData)
             .then(x => {
-                alert("logged in")
                 this.setState({ redirect: '/' });
             })
 
-        console.log("MAKE SURE THIS RAN");
-        localStorage.setItem('username', this.state.userName);
+        console.log("USER TYPE BELOW");
+        console.log(this.accountRepo.getUserType(this.state.userName));    
+        localStorage.setItem('username', this.state.userName); 
+        window.location.reload(true);
+        
         
     }
 

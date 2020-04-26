@@ -59,5 +59,40 @@ export class AccountRepository{
                 })
         });
     }
+
+    updateEmail(username, email){
+        console.log("RIGHT BEFORE UPDATE EMAIL")
+        console.log(username, email)
+        return new Promise((resolve, reject) => {
+            axios.put(`${this.url}/users/update_email/${username}`, {email})
+                .then(x => resolve(x.data))
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        });
+    }
+
+    updateAbout(username, about_me){
+        return new Promise((resolve, reject) => {
+            axios.put(`${this.url}/users/update_aboutme/${username}`, {about_me})
+                .then(x => resolve(x.data))
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        });
+    }
+
+    getUserType(username){
+        return new Promise((resolve, reject) =>{
+            axios.get(`${this.url}/users/get_type/${username}`)
+            .then(x => resolve(x.data))
+            .catch(x => {
+                alert(x);
+                reject(x);  
+            })
+        })
+    }
     
 }

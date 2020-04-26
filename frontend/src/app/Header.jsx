@@ -1,14 +1,23 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
+
 export class Header extends React.Component {
 
-    state= {}
+    state= {
+        sessionUser: ""
+    }
 
     componentDidMount(){
-        console.log("LOL");
+        console.log("Username in Local Storage");
         console.log(localStorage.getItem('username'));
         console.log(typeof localStorage.getItem('username'));
+        this.setState({sessionUser: localStorage.getItem('username')});
+    }
+
+    onLogout(){
+        localStorage.setItem('username', ""); 
+        window.location.reload(true);
     }
 
     render() {
@@ -17,16 +26,17 @@ export class Header extends React.Component {
             <div className="container-fluid">
                 <nav className="navbar bg-info">
                     <Link style={{color: 'white', fontSize: '2em'}} to="/">Medical OverFlow</Link>  
-                    <Link style={{color: 'white', fontSize: '1.5em'}} to={'/users/' + localStorage.getItem('username')}>Profile</Link>
                     <Link style={{color: 'white', fontSize: '1.5em'}} to="/login">Login/Register</Link>
+                    <Link style={{color: 'white', fontSize: '1.5em'}} to={'/users/' + this.state.sessionUser}>Profile</Link>
+                    <Link className="btn btn-warning" style={{margin: '.5em'}} to="/cq">Ask Question</Link>
                     <button
                         type="button"
                         className="btn btn-danger"
                         title="Edit"
+                        onClick={() => this.onLogout()}
                     >
                     <span className="glyphicon glyphicon-pencil" />Logout
                     </button>
-                    <Link className="btn btn-warning" style={{margin: '.5em'}} to="/cq">Ask Question</Link>
                 </nav>
             </div>        
             </>

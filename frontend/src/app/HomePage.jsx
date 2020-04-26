@@ -1,8 +1,7 @@
 import React from "react";
-import {AccountRepository} from './../api/accountRepository';
 import {QuestionRepository} from './../api/questionRepository';
 import {Link} from 'react-router-dom';
-import Cookies from 'universal-cookie';
+
 
 export class HomePage extends React.Component {
   state = {
@@ -19,6 +18,11 @@ export class HomePage extends React.Component {
       console.log(posts);
       this.setState({posts});
     });
+  }
+
+  onUpvote(post_id){
+    this.questionRepository.addUpvote(post_id);
+    window.location.reload(true);
   }
 
   render() {
@@ -43,16 +47,18 @@ export class HomePage extends React.Component {
                           {post.question}
                         </h4>
                       </div>
+                      <p>{post.creation_date}</p>
                       <div className="action">
                         <button
                           type="button"
-                          className="btn btn-primary btn-xs"
+                          className="btn btn-success btn-xs"
                           title="Edit"
+                          onClick={() => this.onUpvote(post.post_id)}
                         >
-                          <span className="glyphicon glyphicon-pencil" />
+                        {post.up_votes}
                         </button>
                       </div>
-                      <p>{post.creation_date}</p>
+               
                       <Link className="btn btn-link"  to={'answers/' + post.post_id}>View Answer(s)</Link>
                     </div>
                   </div>

@@ -1,21 +1,30 @@
 import React from "react";
 import { QuestionRepository } from "../api/questionRepository";
 import Question from "./../models/question";
+import {AccountRepository} from './../api/accountRepository';
 
 
 export class CreateQuestion extends React.Component {
 
     questionRepository = new QuestionRepository();
+    accountRepository = new AccountRepository();
 
     state = {
         question: "",
         date: "",
         tag: "",
-        tags: []
+        tags: [],
+        account: [],
+        userId: ""
     };
 
     componentDidMount(){
-        
+        var username = localStorage.getItem('username');
+        this.accountRepository.getAccount(username)
+        .then(result => {
+          //console.log(result);
+          this.setState({account: result});
+        });
     }
 
     onTagAdd(){
@@ -30,14 +39,25 @@ export class CreateQuestion extends React.Component {
     }
 
     onQuestionAdd(){
-        var tempDate = new Date();
-        var theDate = tempDate.getMonth() +1 + "/" + tempDate.getDate() + "/" + tempDate.getFullYear();
 
-        if(this.state.question.length >= 10){
-            let newquestion = new Question(2222, theDate, 0, 0, this.state.question);
-            console.log("QUetion to be posted here")
-            console.log(newquestion);
-            this.questionRepository.postQuestion(newquestion);
+        if(localStorage.getItem('username') == ""){
+            alert("Please Login Before Asking a Question!");
+        }
+        else {
+            var tempDate = new Date();
+            var theDate = tempDate.getMonth() +1 + "/" + tempDate.getDate() + "/" + tempDate.getFullYear();
+
+            var user_id;
+            this.state.account.map((account) => user_id = account.usr_id)
+            
+
+            if(this.state.question.length >= 10){
+                let newquestion = new Question(user_id, theDate, 0, 0, this.state.question);
+                console.log("QUetion to be posted here")
+                console.log(newquestion);
+                this.questionRepository.postQuestion(newquestion);
+            }
+            alert("Thank you, your question has been submitted!")
         }
 
     }

@@ -63,4 +63,15 @@ export class QuestionRepository{
             })
         })    
     }
+
+    addUpvote(post_id){
+        return new Promise((resolve, reject) =>{
+            axios.put(`${this.url}/posts/update_upvotes/${post_id}`)
+            .then(x => resolve(x.data))
+            .catch(x => {
+                alert(x);
+                reject(x);  
+            })
+        })      
+    }
 }

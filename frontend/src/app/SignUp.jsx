@@ -18,6 +18,7 @@ export class SignUp extends React.Component{
     
     handleCheck(){
         this.setState({checked: !this.state.checked});
+        console.log(this.state.checked);
     }
 
     onSubmit(){
@@ -29,9 +30,11 @@ export class SignUp extends React.Component{
             credentials: this.state.credentials
         }
 
+        //localStorage.setItem('isdoc', this.state.checked);
+
         this.accountRepo.signUp(accountInfo)
             .then(x => {
-                this.setState({redirect: '/'})
+                this.setState({redirect: '/login'})
             })
     }
 
