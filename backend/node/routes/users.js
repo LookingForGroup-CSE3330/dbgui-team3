@@ -143,7 +143,7 @@ router.post('/users/login/', (req, res) => {
     var username = req.body.username
     var password = req.body.password_p    
 
-    connection.query('select * from db.users where users.username = ?', username, (err, result) => {
+    connection.query('select * from db.users where users.username = ?', [username], (err, result) => {
         if(err) throw err
         else {  
             if(result && result.length) {
@@ -154,10 +154,12 @@ router.post('/users/login/', (req, res) => {
                         res.status(200).json({
                             message: "Auth successful"  
                         })
+                    } else {
+                        res.status(401).json({
+                            message: 'authorization failed. wrong password'
+                        }) 
                     }
-                    res.status(401).json({
-                        message: 'authorization failed. wrong password'
-                    })
+                    
                 })
             } else {  
                 //no matching username. no logging in for u
