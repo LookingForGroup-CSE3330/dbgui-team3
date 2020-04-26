@@ -90,6 +90,10 @@ CREATE TABLE `db`.`answers` (
 ALTER TABLE `db`.`answers` 
 CHANGE COLUMN `answer_id` `answer_id` INT(11) NOT NULL AUTO_INCREMENT ;
 
+ALTER TABLE `db`.`answers` 
+ADD COLUMN `up_votes` INT NOT NULL DEFAULT 0 AFTER `answer`,
+ADD COLUMN `down_votes` INT NOT NULL DEFAULT 0 AFTER `up_votes`;
+
 
 INSERT INTO `db`.`answers` (`answer_id`, `post_id`, `user_id`, `date`, `answer`) VALUES ('1', '1', '7777', '4/17/20', 'When you create a volume, it is stored within a directory on the Docker host. When you mount the volume into a container, this directory is what is mounted into the container. This is similar to the way that bind mounts work, except that volumes are managed by Docker and are isolated from the core functionality of the host machine1111');
 INSERT INTO `db`.`answers` (`answer_id`, `post_id`, `user_id`, `date`, `answer`) VALUES ('2', '1', '8888', '4/18/20', 'When you create a volume, it is stored within a directory on the Docker host. When you mount the volume into a container, this directory is what is mounted into the container. This is similar to the way that bind mounts work, except that volumes are managed by Docker and are isolated from the core functionality of the host machine2222');
