@@ -76,10 +76,12 @@ router.post('/users/login/', (req, res) => {
                         res.status(200).json({
                             message: "Auth successful"  
                         })
+                    } else {
+                        res.status(401).json({
+                            message: 'authorization failed. wrong password'
+                        }) 
                     }
-                    res.status(401).json({
-                        message: 'authorization failed. wrong password'
-                    })
+                    
                 })
             } else {  
                 //no matching username. no logging in for u

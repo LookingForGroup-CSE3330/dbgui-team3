@@ -139,6 +139,7 @@ export class SignUp extends React.Component{
                                         name="signUpButton"
                                         onClick={() => this.onSubmit()}
                                     >
+                                        
                                         Sign Up
                                     </button>
                                 </div>  
