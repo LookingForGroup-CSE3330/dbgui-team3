@@ -194,6 +194,6 @@ router.get('/users/get_type/:username', (req, res) => {
             })
         })
     })
-})    
+})  
 
 module.exports = router
