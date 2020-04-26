@@ -54,6 +54,7 @@ server.js establishes connection with the mysql server and exports the connectio
 * answer_count: int, not null.
 * question: string 200, not null.
 * tags: string 45.
+* up_votes: int, not null. default val = 0
 
 ### db.answers ###
 * answer_id: primary key. not null, auto-incremented.
@@ -61,6 +62,8 @@ server.js establishes connection with the mysql server and exports the connectio
 * user_id: int, not null.
 * date: string 45.
 * answer: string 600, not null.
+* up_votes: int, not null. default val = 0
+* down_votes: int, not null. default val = 0
 
 ### db.tags ###
 * tag_id: primary, not null, auto-incremented.

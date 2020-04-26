@@ -43,4 +43,24 @@ router.post('/answers/post/post_answer', (req, res) => {
     })
 })
 
+//UPDATE upvotes
+router.put('/answers/update_upvotes/:answer_id', (req, res) => {
+    var answerid = req.param('answer_id')
+
+    connection.query('update db.answers SET up_votes = up_votes + 1 where answer_id = ?', answerid, (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
+//UPDATE downvotes
+router.put('/answers/update_downvotes/:answer_id', (req, res) => {
+    var answerid = req.param('answer_id')
+
+    connection.query('update db.answers SET down_votes = down_votes + 1 where answer_id = ?', answerid, (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
 module.exports = router
