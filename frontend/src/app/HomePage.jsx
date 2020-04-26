@@ -2,10 +2,12 @@ import React from "react";
 import {AccountRepository} from './../api/accountRepository';
 import {QuestionRepository} from './../api/questionRepository';
 import {Link} from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 export class HomePage extends React.Component {
   state = {
-    posts: []
+    posts: [],
+    username: ""
   };
 
   questionRepository = new QuestionRepository();
@@ -13,6 +15,7 @@ export class HomePage extends React.Component {
   componentDidMount(){
     this.questionRepository.getPosts()
     .then(posts => {
+      console.log("POSTS");
       console.log(posts);
       this.setState({posts});
     });

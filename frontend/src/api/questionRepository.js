@@ -52,4 +52,15 @@ export class QuestionRepository{
             })
         })
     }
+
+    getTagsForQuestion(post_id){
+        return new Promise((resolve, reject) =>{
+            axios.get(`${this.url}/tags/get/${post_id}`)
+            .then(x => resolve(x.data))
+            .catch(x => {
+                alert(x);
+                reject(x);  
+            })
+        })    
+    }
 }

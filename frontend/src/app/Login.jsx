@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
 import { AccountRepository } from '../api/accountRepository';
+import Cookies from 'universal-cookie';
 
 export class Login extends React.Component{
 
@@ -23,6 +24,8 @@ export class Login extends React.Component{
                 this.setState({ redirect: '/' });
             })
 
+        console.log("MAKE SURE THIS RAN");
+        localStorage.setItem('username', this.state.userName);
         
     }
 

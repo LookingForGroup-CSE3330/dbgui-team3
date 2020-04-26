@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {AccountRepository} from './../api/accountRepository';
 import { QuestionRepository } from "../api/questionRepository";
 import { AnswerRepository } from "../api/answerRepository";
+import {Cookies} from 'universal-cookie';
 
 export class AccountPage extends React.Component {
   accountRepository = new AccountRepository();
@@ -16,6 +17,7 @@ export class AccountPage extends React.Component {
 
 
 componentDidMount(){
+
   let username = this.props.match.params.username;
   if(username){
     this.accountRepository.getAccount(username)
@@ -60,8 +62,7 @@ componentDidMount(){
                       </div>
                       <ul className="list-group list-group-flush">
                         <li className="list-group-item">{account.email}</li>
-                        <li className="list-group-item">Phone Number</li>
-                        <li className="list-group-item">Other?</li>
+              
                       </ul>
                       
                       <div className="card-body">
