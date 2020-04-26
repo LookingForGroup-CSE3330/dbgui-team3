@@ -45,4 +45,14 @@ router.post('/posts/post', (req, res) => {
     })
 })
 
+//UPDATE upvote
+router.put('/posts/update_upvotes/:post_id', (req, res) => {
+    var postid = req.param('post_id')
+
+    connection.query('update db.posts set up_votes = up_votes + 1 where post_id = ?', postid, (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
 module.exports = router

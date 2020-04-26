@@ -26,6 +26,84 @@ router.get('/users/viewaccount/:username', (req, res) => {
     })       
 })
 
+//GET about_me: USE THIS FOR UPDATING ABOUT_ME
+router.get('/users/get_aboutme/:username', (req, res) => {
+    var username = req.param('username')
+    connection.query('select about_me from db.users where username = ?', username, (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
+//Edit functionalities for a user's profile
+
+//UPDATE username
+router.put('/users/update_username/:username', (req, res) => {
+    var username_old = req.param('username')
+    var username_new = req.body.username
+
+    connection.query('update db.users set username = ? where username = ?', [username_new, username_old], (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
+//UPDATE  password
+router.put('/users/update_password/:username', (req, res) => {
+    var username = req.param('username')
+    var password_new = req.body.password_p
+    bcrypt.hash(password_new, 0, (err, hash) => {
+        if(err) throw err
+        else {
+            connection.query('update db.users set password_p = ? where username = ?', [hash, username], (err, result, fields) => {
+                if(err) throw err
+                res.send(JSON.stringify(result))
+            })
+        }
+    })
+})
+
+//UPDATE about me
+router.put('/users/update_aboutme/:username', (req, res) => {
+    var username = req.param('username')
+    var about_me = req.body.about_me
+
+    connection.query('update db.users set about_me = ? where username = ?', [about_me, username], (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
+//UPDATE profile image
+router.put('/users/update_profileimg/:username', (req, res) => {
+    var username = req.param('username')
+    var profile_img = req.body.profile_img
+    connection.query('update db.users set profile_img = ? where username = ?', [profile_img, username], (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
+//UPDATE email
+router.put('/users/update_email/:username', (req, res) => {
+    var username = req.param('username')
+    var email = req.body.email
+    connection.query('update db.users set email = ? where username = ?', [email, username], (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
+//UPDATE credentials
+router.put('/users/update_credentials/:username', (req, res) => {
+    var username = req.param('username')
+    var credentials = req.body.credentials
+    connection.query('update db.users set credentials = ? where username = ?', [credentials, username], (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
 //USER Authentication   
 
 //Signup (includes password hashing so we dont store plaintext passwords in the db)
@@ -91,7 +169,6 @@ router.post('/users/login/', (req, res) => {
 
     })
 })
-
 
 //Delete a user
 router.delete('/users/:username/delete', async (req, res) => {

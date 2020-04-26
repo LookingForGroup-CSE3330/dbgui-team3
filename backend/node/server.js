@@ -46,15 +46,7 @@ app.get('/', (req, res) => {
   res.status(200).send('Go to 0.0.0.0:3000.');
 });
 
-// router.use((req, res, next) => {
-//   console.log('router being used...')
-//   next()
-// })
-
 module.exports = connection
-
-//let hello_world_router = require('./routes/hello_world')
-
 
 let user_router = require('./routes/users')
 let post_router = require('./routes/posts')
