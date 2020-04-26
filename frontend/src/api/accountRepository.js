@@ -40,9 +40,23 @@ export class AccountRepository{
 
     login(loginData){
         return new Promise((resolve, reject) => {
-            axios.post(`${this.url}/users/login`, loginData, this.config)
+            axios.post(`${this.url}/users/login/`, loginData)
                 .then(x => resolve(x.data))
-                .catch(x => resolve({error: "Wrong username or password"}));
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                });
+        });
+    }
+
+    signUp(formData){
+        return new Promise((resolve, reject) => {
+            axios.post(`${this.url}/users/signUp/`, formData)
+                .then(x => resolve(x.data))
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
         });
     }
     

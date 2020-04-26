@@ -35,5 +35,21 @@ export class AnswerRepository{
             })
         })
     }
+
+    postAnswer(answer, post_id){
+        return new Promise((resolve, reject) => {
+            axios.post(`${this.url}/answers/post/post_answer`, {
+                post_id: post_id,
+                user_id: answer.user_id,
+                date: answer.date,
+                answer: answer.answer
+            })
+            .then(x => resolve(x.data))
+            .catch(x => {
+                alert(x);
+                reject(x);
+            })
+        })       
+    }
     
 }

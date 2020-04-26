@@ -2,10 +2,12 @@ import React from "react";
 import {AccountRepository} from './../api/accountRepository';
 import {QuestionRepository} from './../api/questionRepository';
 import {Link} from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 export class HomePage extends React.Component {
   state = {
-    posts: []
+    posts: [],
+    username: ""
   };
 
   questionRepository = new QuestionRepository();
@@ -13,6 +15,7 @@ export class HomePage extends React.Component {
   componentDidMount(){
     this.questionRepository.getPosts()
     .then(posts => {
+      console.log("POSTS");
       console.log(posts);
       this.setState({posts});
     });
@@ -29,7 +32,7 @@ export class HomePage extends React.Component {
           >
             <ul className="list-group">
               <li className="list-group-item text-center">
-                <p style={{ fontWeight: "bold" }}>Site Questions</p>
+                <p style={{ fontWeight: "bold", fontSize: '2em'}}>Site Questions</p>
               </li>
               {this.state.posts.map(post => (
                 <li className="list-group-item" key={post.post_id}>
@@ -40,7 +43,6 @@ export class HomePage extends React.Component {
                           {post.question}
                         </h4>
                       </div>
-                      <div className="comment-text">Lorem ipsum ........</div>
                       <div className="action">
                         <button
                           type="button"
@@ -51,6 +53,7 @@ export class HomePage extends React.Component {
                         </button>
                       </div>
                       <p>{post.creation_date}</p>
+                      <Link className="btn btn-link"  to={'answers/' + post.post_id}>View Answer(s)</Link>
                     </div>
                   </div>
                 </li>                

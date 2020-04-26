@@ -24,4 +24,43 @@ export class QuestionRepository{
             })
         })       
     }
+
+    getPostByPostId(post_id){
+        return new Promise((resolve, reject) =>{
+            axios.get(`${this.url}/posts/getbyid/${post_id}`)
+            .then(x => resolve(x.data))
+            .catch(x => {
+                alert(x);
+                reject(x);  
+            })
+        })       
+    }
+
+    postQuestion(question){
+        return new Promise((resolve, reject) => {
+            axios.post(`${this.url}/posts/post`, {
+                user_id: question.user_id,
+                creation_date: question.creation_date,
+                viewCount: 0,
+                answer_count: 0,
+                question: question.question
+            })
+            .then(x => resolve(x.data))
+            .catch(x => {
+                alert(x);
+                reject(x);
+            })
+        })
+    }
+
+    getTagsForQuestion(post_id){
+        return new Promise((resolve, reject) =>{
+            axios.get(`${this.url}/tags/get/${post_id}`)
+            .then(x => resolve(x.data))
+            .catch(x => {
+                alert(x);
+                reject(x);  
+            })
+        })    
+    }
 }
