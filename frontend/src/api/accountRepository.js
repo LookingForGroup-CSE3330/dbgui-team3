@@ -116,5 +116,16 @@ export class AccountRepository{
                 })
         });
     }
+
+    deleteUser(username){
+        return new Promise((resolve, reject) => {
+            axios.delete(`${this.url}/users/${username}/delete`)
+                .then(x => resolve(x.data))
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        });
+    }
     
 }

@@ -55,13 +55,6 @@ export class AnswerPage extends React.Component {
                             </p>
                           </div>
                           <div className="action">
-                            <button
-                              type="button"
-                              className="btn btn-primary btn-xs"
-                              title="Edit"
-                            >
-                              <span className="glyphicon glyphicon-pencil" />
-                            </button>
                           </div>
                           <p>{answer.date}</p>
                         </div>

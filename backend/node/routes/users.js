@@ -181,20 +181,6 @@ router.delete('/users/:username/delete', async (req, res) => {
       })
 })
 
-//return user's type   s
-router.get('/users/get_type/:username', (req, res) => {
-    var username = req.param('username')
-    connection.query('select usr_id from db.users where username = ?', username, (err, result, fields) => {
-        if(err) throw err
-        connection.query('select role_id from db.user_roles where usr_id = ?', result[0].usr_id, (err_n, result_n, fields_n) => {
-            if(err_n) throw err_n
-            connection.query('select role_name from db.roles where role_id = ?', result_n[0].role_id, (err_f, result_f, fields_f) => {
-                if(err_f) throw err_f
-                res.send(JSON.stringify(result_f))
 
-            })
-        })
-    })
-})  
 
 module.exports = router

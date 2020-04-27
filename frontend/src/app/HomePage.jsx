@@ -23,11 +23,6 @@ export class HomePage extends React.Component {
     
   }
 
-  componentDidUpdate(){
-    console.log("KILL ME");
-    console.log(this.accountRepository.getUserType(localStorage.getItem('username')));
-  }
-
   onUpvote(post_id){
     this.questionRepository.addUpvote(post_id);
     window.location.reload(true);

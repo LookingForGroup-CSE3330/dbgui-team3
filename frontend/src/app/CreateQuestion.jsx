@@ -2,6 +2,7 @@ import React from "react";
 import { QuestionRepository } from "../api/questionRepository";
 import Question from "./../models/question";
 import {AccountRepository} from './../api/accountRepository';
+import {BrowserRouter as Redirect} from 'react-router-dom';
 
 
 export class CreateQuestion extends React.Component {
@@ -25,6 +26,9 @@ export class CreateQuestion extends React.Component {
           //console.log(result);
           this.setState({account: result});
         });
+        if(localStorage.getItem('role')){
+            this.setState({redirect: '/'})
+        }
     }
 
     onTagAdd(){
@@ -63,6 +67,9 @@ export class CreateQuestion extends React.Component {
     }
 
     render() {
+        if(this.state.redirect) {
+            return <Redirect to={this.state.redirect} />
+        }
         return (
         <>
             <div className="container">

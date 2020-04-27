@@ -10,6 +10,7 @@ export class Login extends React.Component{
     state = {
         userName: '',
         password_p: '',
+        account: []
     }
 
     signIn() {
@@ -26,6 +27,16 @@ export class Login extends React.Component{
         localStorage.setItem('username', this.state.userName); 
         
         window.location.reload(true);
+
+        
+    }
+
+    componentDidMount(){
+        this.accountRepo.getAccount(localStorage.getItem('username'))
+        .then(result => {
+            this.setState({account: result[0]})
+        })
+
     }
 
     render(){
@@ -35,6 +46,10 @@ export class Login extends React.Component{
 
         return(
             <>
+            {console.log("account below")}
+            {console.log(this.state.account)}
+            {localStorage.setItem('role', this.state.account.credentials)}
+            
             <div className="container">
                     <div className="card">
                         <div className="card-header text-center">

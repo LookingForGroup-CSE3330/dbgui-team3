@@ -29,15 +29,20 @@ export class AnswerQuestion extends React.Component {
 
 
     onAnswerAdd(){
-        var tempDate = new Date();
-        var theDate = tempDate.getMonth() +1 + "/" + tempDate.getDate() + "/" + tempDate.getFullYear();
-        var post_id = this.props.match.params.post_id;
+        if(!localStorage.getItem('role')){
+            alert("Sorry, only Doctors can answers questions!")
+        }
+        else{
+            var tempDate = new Date();
+            var theDate = tempDate.getMonth() +1 + "/" + tempDate.getDate() + "/" + tempDate.getFullYear();
+            var post_id = this.props.match.params.post_id;
 
-        if(this.state.answer.length >= 10){
-            let newanswer = new Answer(post_id, 7777, theDate, this.state.answer) //NEED TO ADD user_id (this is the id of the person,doc, answering the question) after post_id parameter
-            console.log("answer to be posted here")
-            console.log(newanswer);
-            this.answerRepositroy.postAnswer(newanswer, post_id);
+            if(this.state.answer.length >= 10){
+                let newanswer = new Answer(post_id, 7777, theDate, this.state.answer) //NEED TO ADD user_id (this is the id of the person,doc, answering the question) after post_id parameter
+                console.log("answer to be posted here")
+                console.log(newanswer);
+                this.answerRepositroy.postAnswer(newanswer, post_id);
+            }
         }
     }
 

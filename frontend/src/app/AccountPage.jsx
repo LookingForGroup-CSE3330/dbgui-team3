@@ -1,8 +1,9 @@
 import React from "react";
-import {Link} from 'react-router-dom';
+//import {Link} from 'react-router-dom';
 import {AccountRepository} from './../api/accountRepository';
 import { QuestionRepository } from "../api/questionRepository";
 import { AnswerRepository } from "../api/answerRepository";
+import {BrowserRouter as Link, Redirect} from 'react-router-dom';
 
 export class AccountPage extends React.Component {
   accountRepository = new AccountRepository();
@@ -65,9 +66,23 @@ onEditAbout(about_me){
   if(about_me.length >= 5){
     let username = this.props.match.params.username;
     this.accountRepository.updateAbout(username, about_me)
+    this.setState({redirect: '/login'})
   }
   else{
     alert("About Me is too short!")
+  }
+}
+
+onDeleteQuestion(){
+
+}
+
+onDeleteAccount(username){
+  if(window.confirm("Are you sure you want to delete your account?")){
+    this.accountRepository.deleteUser(username);
+  }
+  else{
+    console.log("Account not deleted.");
   }
 }
 
@@ -118,6 +133,10 @@ onEditAbout(about_me){
           </button>
       </div> 
       : null;
+
+      if(this.state.redirect) {
+        return <Redirect to={this.state.redirect} />
+      }
     return (
       <>     
       {/*Profile Part */}
@@ -165,6 +184,15 @@ onEditAbout(about_me){
                         />
                     </div>
                     {hiddenEmail}
+                    <button
+                        type="button"
+                        className="btn btn-danger"
+                        title="DeleteAcct"
+                        style={{marginTop: '5em'}}
+                        onClick={() => this.onDeleteAccount(account.username)}
+                    >
+                    <span className="glyphicon glyphicon-pencil" />Delete Account
+                    </button>
                     </li>
                     ))}
                   </ul>
@@ -189,6 +217,15 @@ onEditAbout(about_me){
                           </div>
                           <p>{post.creation_date}</p>
                           <Link className="btn btn-link"  to={'../answers/' + post.post_id}>View Answer(s)</Link>
+                          <button
+                          type="button"
+                          className="btn btn-danger"
+                          title="RmvQ"
+                          style={{float: 'right'}}
+                          onClick={() => this.onDeleteQuestion()}
+                           >
+                            <span className="glyphicon glyphicon-pencil" />Remove
+                          </button>
                         </div>
                       </div>
                     </li>                
