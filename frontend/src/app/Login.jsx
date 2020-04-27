@@ -22,16 +22,10 @@ export class Login extends React.Component{
             .then(x => {
                 this.setState({ redirect: '/' });
             })
-
             
         localStorage.setItem('username', this.state.userName); 
-        console.log("Please");
-        console.log(this.accountRepo.getUserType(this.state.userName));
         
         window.location.reload(true);
-        console.log("Please");
-        var role = this.accountRepo.getUserType(this.state.userName);
-        console.log(role);
     }
 
     render(){

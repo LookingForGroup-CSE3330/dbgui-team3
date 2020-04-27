@@ -190,7 +190,8 @@ router.get('/users/get_type/:username', (req, res) => {
             if(err_n) throw err_n
             connection.query('select role_name from db.roles where role_id = ?', result_n[0].role_id, (err_f, result_f, fields_f) => {
                 if(err_f) throw err_f
-                res.send({result_f})
+                res.send(JSON.stringify(result_f))
+
             })
         })
     })

@@ -1,6 +1,7 @@
 import React from "react";
 import {QuestionRepository} from './../api/questionRepository';
 import {Link} from 'react-router-dom';
+import { AccountRepository } from "../api/accountRepository";
 
 
 export class HomePage extends React.Component {
@@ -10,6 +11,7 @@ export class HomePage extends React.Component {
   };
 
   questionRepository = new QuestionRepository();
+  accountRepository = new AccountRepository();
   
   componentDidMount(){
     this.questionRepository.getPosts()
@@ -18,6 +20,12 @@ export class HomePage extends React.Component {
       console.log(posts);
       this.setState({posts});
     });
+    
+  }
+
+  componentDidUpdate(){
+    console.log("KILL ME");
+    console.log(this.accountRepository.getUserType(localStorage.getItem('username')));
   }
 
   onUpvote(post_id){
