@@ -1,17 +1,16 @@
 import React from 'react';
-import axios from 'axios';
-import {Login} from './app/Login';
-import {HomePage} from './app/HomePage';
-import {AccountPage} from './app/AccountPage';
-import {CreateQuestion} from './app/CreateQuestion';
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 import {ROUTES} from './routes.js';
 import {Header} from './app/Header';
 
+
+
+
 class App extends React.Component {
+  
   state = {}
 
-  
+
   // tell app to fetch values from db on first load (if initialized)
 
   // fetches vals of db via GET request
@@ -25,7 +24,6 @@ class App extends React.Component {
     });
   }
   */
-
 
   render(){
     return(

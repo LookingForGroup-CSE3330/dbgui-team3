@@ -17,12 +17,21 @@ router.get('/posts/get/:username', (req, res) => {
         if(err) throw err
         res.send(JSON.stringify(result))
     })
-})  
+})
+
+//get request for getting a single post (question) by its id? whenever you get the chance
+router.get('/posts/getbyid/:post_id', (req, res) => {
+    var postid = req.param('post_id')
+    connection.query('select * from db.posts where post_id = ?', postid, (err,result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
 
 //POST
 router.post('/posts/post', (req, res) => {
     var post = {
-        post_id: req.body.post_id,
+        //post_id: req.body.post_id,
         user_id: req.body.user_id,
         creation_date: req.body.creation_date,
         viewCount: req.body.viewCount,
@@ -31,6 +40,16 @@ router.post('/posts/post', (req, res) => {
     }
 
     connection.query('insert into db.posts SET ?', post, (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
+//UPDATE upvote
+router.put('/posts/update_upvotes/:post_id', (req, res) => {
+    var postid = req.param('post_id')
+
+    connection.query('update db.posts set up_votes = up_votes + 1 where post_id = ?', postid, (err, result, fields) => {
         if(err) throw err
         res.send(JSON.stringify(result))
     })

@@ -30,7 +30,7 @@ router.get('/answers/get/:user_id',(req, res) => {
 //POST
 router.post('/answers/post/post_answer', (req, res) => {
     var answer = {
-        answer_id: req.body.answer_id,
+        //answer_id: req.body.answer_id,
         post_id: req.body.post_id,
         user_id: req.body.user_id,
         date: req.body.date,
@@ -38,6 +38,26 @@ router.post('/answers/post/post_answer', (req, res) => {
     }
     
     connection.query('insert into db.answers SET ?', answer, (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
+//UPDATE upvotes
+router.put('/answers/update_upvotes/:answer_id', (req, res) => {
+    var answerid = req.param('answer_id')
+
+    connection.query('update db.answers SET up_votes = up_votes + 1 where answer_id = ?', answerid, (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
+//UPDATE downvotes
+router.put('/answers/update_downvotes/:answer_id', (req, res) => {
+    var answerid = req.param('answer_id')
+
+    connection.query('update db.answers SET down_votes = down_votes + 1 where answer_id = ?', answerid, (err, result, fields) => {
         if(err) throw err
         res.send(JSON.stringify(result))
     })

@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
 import { AccountRepository } from '../api/accountRepository';
+import Cookies from 'universal-cookie';
 
 export class Login extends React.Component{
 
@@ -8,36 +9,47 @@ export class Login extends React.Component{
 
     state = {
         userName: '',
-        password: '',
-        loginSuccess: false
+        password_p: '',
+        account: []
     }
 
     signIn() {
-        this.setState({loginSuccess: false});
-
-        /*var loginData = {
-            userName: this.state.userName,
-            password: this.state.password
-        }
+        let loginData = {
+            username: this.state.userName,
+            password_p: this.state.password_p
+        };
 
         this.accountRepo.login(loginData)
             .then(x => {
-                if(x.error || x === "Wrong username or password") {
-                    this.setState({loginSuccess: false});
-                }
-                else {
-                    this.setState({loginSuccess: true});
-                    this.props.history.push({pathName: '/'});
-                }
-            })*/
+                this.setState({ redirect: '/' });
+            })
+            
+        localStorage.setItem('username', this.state.userName); 
+        
+        window.location.reload(true);
 
-        this.setState({loginSuccess: true})
+        
+    }
+
+    componentDidMount(){
+        this.accountRepo.getAccount(localStorage.getItem('username'))
+        .then(result => {
+            this.setState({account: result[0]})
+        })
+
     }
 
     render(){
+        if(this.state.redirect){
+            return <Redirect to={ this.state.redirect } />
+        }
+
         return(
             <>
-            {this.state.loginSuccess && <Redirect to='/' />}
+            {console.log("account below")}
+            {console.log(this.state.account)}
+            {localStorage.setItem('role', this.state.account.credentials)}
+            
             <div className="container">
                     <div className="card">
                         <div className="card-header text-center">
@@ -67,11 +79,11 @@ export class Login extends React.Component{
                                         <input 
                                             type="password"
                                             className="form-control"
-                                            id="userNameInput"
-                                            name="userNameInput"
+                                            id="passwordInput"
+                                            name="passwordInput"
                                             placeholder="Password"
-                                            value={this.state.password}
-                                            onChange={e => this.setState({password: e.target.value})}
+                                            value={this.state.password_p}
+                                            onChange={e => this.setState({password_p: e.target.value})}
                                             required  
                                         />
                                     </div> 
@@ -79,7 +91,7 @@ export class Login extends React.Component{
                                 <div className="form-group row">
                                     <div className="col">
                                         <button 
-                                            type="sbutton" 
+                                            type="button" 
                                             className="btn btn-primary btn-block"
                                             id="loginButton"
                                             name="loginButton"
@@ -91,14 +103,14 @@ export class Login extends React.Component{
                                 </div>
                             </form>
                             <hr/>
-                            <button 
-                                type="button" 
+                            <Link 
+                                to={'signUp'}
                                 className="btn btn-secondary btn-block"
-                                id="createAccountButton"
+                                id="creatAccountButton"
                                 name="createAccountButton"
                             >
-                                Don't have an account? Sign up here!
-                            </button>
+                                Don't have an account? Sign up here! 
+                            </Link>
                         </div>
                     </div>
             </div>
