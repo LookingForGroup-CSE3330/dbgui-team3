@@ -29,11 +29,17 @@ export class SignUp extends React.Component{
             email: this.state.email,
             credentials: this.state.credentials
         }
-
-        //localStorage.setItem('isdoc', this.state.checked);
+        var role;
+        if(this.state.checked){
+            role = 1000;
+        }
+        else{
+            role = 2000;
+        }
 
         this.accountRepo.signUp(accountInfo)
             .then(x => {
+                this.accountRepo.postUserRole(this.state.username, role)
                 this.setState({redirect: '/login'})
             })
     }

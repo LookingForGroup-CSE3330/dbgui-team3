@@ -23,12 +23,15 @@ export class Login extends React.Component{
                 this.setState({ redirect: '/' });
             })
 
-        console.log("USER TYPE BELOW");
-        console.log(this.accountRepo.getUserType(this.state.userName));    
+            
         localStorage.setItem('username', this.state.userName); 
+        console.log("Please");
+        console.log(this.accountRepo.getUserType(this.state.userName));
+        
         window.location.reload(true);
-        
-        
+        console.log("Please");
+        var role = this.accountRepo.getUserType(this.state.userName);
+        console.log(role);
     }
 
     render(){

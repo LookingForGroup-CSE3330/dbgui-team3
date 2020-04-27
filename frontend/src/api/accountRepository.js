@@ -94,5 +94,27 @@ export class AccountRepository{
             })
         })
     }
+
+    postUserRole(username, role_id){
+        return new Promise((resolve, reject) => {
+            axios.post(`${this.url}/user_roles/post/${username}`, {role_id})
+                .then(x => resolve(x.data))
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        });
+    }
+
+    updateUserRole(username, role_name){
+        return new Promise((resolve, reject) => {
+            axios.put(`${this.url}/user_roles/update_roles/${username}`, {role_name})
+                .then(x => resolve(x.data))
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        });
+    }
     
 }
