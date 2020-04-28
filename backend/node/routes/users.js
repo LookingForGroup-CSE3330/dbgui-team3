@@ -174,7 +174,7 @@ router.post('/users/login/', (req, res) => {
 router.delete('/users/delete/:username', (req, res) => {
     var username = req.param('username')
 
-    connection.query(`DELETE FROM db.users WHERE db.username = ?`, username, (err, result, fields) => {
+    connection.query(`DELETE FROM db.users WHERE username = ?`, username, (err, result, fields) => {
         if (err) throw err
         res.send(JSON.stringify(result));
     })
