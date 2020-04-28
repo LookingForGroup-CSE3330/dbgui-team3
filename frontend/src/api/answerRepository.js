@@ -51,5 +51,16 @@ export class AnswerRepository{
             })
         })       
     }
+
+    deleteAnswer(answer_id){
+        return new Promise((resolve, reject) => {
+            axios.delete(`${this.url}/answers/delete/${answer_id}`)
+                .then(x => resolve(x.data))
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
     
 }

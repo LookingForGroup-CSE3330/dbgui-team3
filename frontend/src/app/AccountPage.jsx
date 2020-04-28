@@ -98,8 +98,10 @@ onDeleteQuestion(){
 
 }
 
-onDeleteAnswer(){
-
+onDeleteAnswer(ans_id){
+  if(window.confirm("Are you sure you want to this answer to a question?")){
+    this.answerRepository.deleteAnswer(ans_id);
+  }
 }
 
 onDeleteAccount(username){
@@ -183,7 +185,7 @@ onDeleteAccount(username){
                     className="btn btn-danger"
                     title="RmvQ"
                     style={{float: 'right'}}
-                    onClick={() => this.onDeleteAnswer()}
+                    onClick={() => this.onDeleteAnswer(answer.answer_id)}
                   >
                     <span className="glyphicon glyphicon-pencil" />Remove
                 </button>
