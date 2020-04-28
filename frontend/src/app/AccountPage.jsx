@@ -16,13 +16,24 @@ export class AccountPage extends React.Component {
     editEmail: false,
     editAbout: false,
     newEmail: "",
-    newAbout: ""
+    newAbout: "",
+    answers: []
   };
 
   handleEmailCheck = this.handleEmailCheck.bind(this);
   handleAboutCheck = this.handleAboutCheck.bind(this);
 
 componentDidMount(){
+
+  if(localStorage.getItem('role')){
+    this.answerRepository.getUsersAnswers(localStorage.getItem('currentid'))
+    .then(result => {
+      this.setState({answers: result});
+      console.log("ANSWERS");
+      console.log(result);
+      console.log(localStorage.getItem('currentid'))
+    })
+  }
 
   let username = this.props.match.params.username;
   if(username){
@@ -39,6 +50,7 @@ componentDidMount(){
   }
 
 }
+
 
 handleEmailCheck(){
   this.setState({editEmail: !this.state.editEmail});
@@ -74,6 +86,10 @@ onEditAbout(about_me){
 }
 
 onDeleteQuestion(){
+
+}
+
+onDeleteAnswer(){
 
 }
 
@@ -134,14 +150,13 @@ onDeleteAccount(username){
       </div> 
       : null;
 
+
       if(this.state.redirect) {
         return <Redirect to={this.state.redirect} />
       }
     return (
       <>     
       {/*Profile Part */}
-      {console.log("here")}
-      {console.log(this.state.account)}
       <div className="container-fluid">
                 <div
                   className="container"
@@ -230,10 +245,75 @@ onDeleteAccount(username){
                       </div>
                     </li>                
                     ))}
+                    {console.log(this.state.answers)}
+                    {this.state.answers.map(answer => (
+                    <li className="list-group-item" key={answer.answer_id}>
+                      <div className="row">
+                        <div className="col-xs-10 col-md-11">
+                          <div>
+                            <h4>
+                              {answer.answer}
+                            </h4>
+                          </div>
+                          <p>{answer.date}</p>
+                          <Link className="btn btn-link"  to={'../answers/' + answer.post_id}>View Answer(s)</Link>
+                          <button
+                          type="button"
+                          className="btn btn-danger"
+                          title="RmvQ"
+                          style={{float: 'right'}}
+                          onClick={() => this.onDeleteAnswer()}
+                           >
+                            <span className="glyphicon glyphicon-pencil" />Remove
+                          </button>
+                        </div>
+                      </div>
+                    </li>                
+                    ))}
                   </ul>
                 </div>
-              </div>
+              </div>   
+                
       </>
     );
   }
 }
+
+/*
+            <div
+            className="container"
+            style={{ width: "80vw", paddingTop: "3em" }}
+            >
+                  <ul className="list-group">
+                    <li className="list-group-item text-center">
+                      <p style={{ fontWeight: "bold" }}>My Questions</p>
+                    </li>
+                    {this.state.answers.map(answer => (
+                    <li className="list-group-item" key={post.post_id}>
+                      <div className="row">
+                        <div className="col-xs-10 col-md-11">
+                          <div>
+                            <h4>
+                              {answer.answer}
+                            </h4>
+                          </div>
+                          <p>{answer.date}</p>
+                          <Link className="btn btn-link"  to={'../answers/' + answer.post_id}>View Answer(s)</Link>
+                          <button
+                          type="button"
+                          className="btn btn-danger"
+                          title="RmvQ"
+                          style={{float: 'right'}}
+                          onClick={() => this.onDeleteAnswer()}
+                           >
+                            <span className="glyphicon glyphicon-pencil" />Remove
+                          </button>
+                        </div>
+                      </div>
+                    </li>                
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              */

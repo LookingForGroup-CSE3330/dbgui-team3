@@ -46,6 +46,7 @@ export class Login extends React.Component{
         if(localStorage.getItem('visit')){
             console.log(this.state.account)
             localStorage.setItem('role', this.state.account.credentials)
+            localStorage.setItem('currentid', this.state.account.usr_id)
         }
     }
 
