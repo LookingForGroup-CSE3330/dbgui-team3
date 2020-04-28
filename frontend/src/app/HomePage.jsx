@@ -7,14 +7,16 @@ import { AccountRepository } from "../api/accountRepository";
 export class HomePage extends React.Component {
   state = {
     posts: [],
-    username: ""
+    username: "",
+    sortVotes: false,
+    sortDate: true
   };
 
   questionRepository = new QuestionRepository();
   accountRepository = new AccountRepository();
   
   componentDidMount(){
-    this.questionRepository.getPosts()
+    this.questionRepository.getPostsSortedDate()
     .then(posts => {
       console.log("POSTS");
       console.log(posts);
@@ -23,6 +25,7 @@ export class HomePage extends React.Component {
     
   }
 
+  //FIXME: lets you upvote unlimited times right now lol
   onUpvote(post_id, user_id_post){
     if(localStorage.getItem('loggedin') == "yes"){
       if(localStorage.getItem('currentId') != user_id_post){
