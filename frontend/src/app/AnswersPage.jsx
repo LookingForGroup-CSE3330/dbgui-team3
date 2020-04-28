@@ -15,7 +15,7 @@ export class AnswerPage extends React.Component {
     componentDidMount() {
         let post_id = this.props.match.params.post_id;
         if(post_id){
-            this.answerRepository.getAnswerForQuestion(post_id)
+            this.answerRepository.getAnswersForQuestionSorted(post_id)
             .then(result => {
                 console.log(result);
                 this.setState({answers: result});
