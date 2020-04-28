@@ -23,9 +23,13 @@ export class HomePage extends React.Component {
     
   }
 
-  onUpvote(post_id){
-    this.questionRepository.addUpvote(post_id);
-    window.location.reload(true);
+  onUpvote(post_id, user_id_post){
+    if(localStorage.getItem('loggedin') == "yes"){
+      if(localStorage.getItem('currentId') != user_id_post){
+        this.questionRepository.addUpvote(post_id);
+        window.location.reload(true);
+      }
+    }
   }
 
   render() {
@@ -56,7 +60,7 @@ export class HomePage extends React.Component {
                           type="button"
                           className="btn btn-success btn-xs"
                           title="Edit"
-                          onClick={() => this.onUpvote(post.post_id)}
+                          onClick={() => this.onUpvote(post.post_id, post.user_id)}
                         >
                         {post.up_votes}
                         </button>
@@ -67,7 +71,6 @@ export class HomePage extends React.Component {
                   </div>
                 </li>                
               ))}
-
             </ul>
           </div>
         </div>

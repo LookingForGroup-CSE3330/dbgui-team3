@@ -55,4 +55,13 @@ router.put('/posts/update_upvotes/:post_id', (req, res) => {
     })
 })
 
+//delete a post
+router.delete('/posts/delete/:post_id', (req, res) => {
+    var postid = req.param('post_id')
+    connection.query('delete from db.posts where post_id = ?', postid, (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
 module.exports = router

@@ -11,20 +11,6 @@ class App extends React.Component {
   state = {}
 
 
-  // tell app to fetch values from db on first load (if initialized)
-
-  // fetches vals of db via GET request
-  /*
-  fetchVals = () => {
-    axios.get('http://localhost:8000/values').then(
-      res => {
-        const values = res.data;
-        console.log(values.data);
-        this.setState({ values: values.data });
-    });
-  }
-  */
-
   render(){
     return(
       <>
