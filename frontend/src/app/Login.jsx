@@ -41,6 +41,7 @@ export class Login extends React.Component{
             this.setState({account: result[0]})
             console.log(this.state.account);
             localStorage.setItem('currentId', this.state.account.usr_id);
+            localStorage.setItem('role', this.state.account.credentials);
         })
 
     }
@@ -49,7 +50,7 @@ export class Login extends React.Component{
         if(localStorage.getItem('visit')){
             console.log(this.state.account)
             localStorage.setItem('role', this.state.account.credentials)
-            localStorage.setItem('currentid', this.state.account.usr_id)
+            localStorage.setItem('currentId', this.state.account.usr_id)
         }
     }
 

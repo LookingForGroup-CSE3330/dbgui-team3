@@ -15,6 +15,7 @@ export class AccountPage extends React.Component {
     posts: [],
     editEmail: false,
     editAbout: false,
+    showAns: false,
     newEmail: "",
     newAbout: "",
     answers: []
@@ -32,7 +33,7 @@ componentDidMount(){
       this.setState({answers: result});
       console.log("ANSWERS");
       console.log(result);
-      console.log(localStorage.getItem('currentId'))
+      this.setState({showAns: ! this.state.showAns})
     })
   }
 
@@ -153,6 +154,37 @@ onDeleteAccount(username){
       </div> 
       : null;
 
+      const hiddenAnswers = this.state.showAns
+      ? <ul className="list-group">
+          <li className="list-group-item text-center">
+            <p style={{ fontWeight: "bold" }}>My Answers</p>
+          </li>
+          {this.state.answers.map(answer => (
+            <li className="list-group-item" key={answer.answer_id}>
+              <div className="row">
+                <div className="col-xs-10 col-md-11">
+                  <div>
+                    <h4>
+                      {answer.answer}
+                    </h4>
+                </div>
+                <p>{answer.date}</p>
+                <Link className="btn btn-link"  to={'../answers/' + answer.post_id}>View Answer(s)</Link>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    title="RmvQ"
+                    style={{float: 'right'}}
+                    onClick={() => this.onDeleteAnswer()}
+                  >
+                    <span className="glyphicon glyphicon-pencil" />Remove
+                </button>
+            </div>
+          </div>
+        </li>            
+        ))}
+      </ul>
+      : null;
 
       if(this.state.redirect) {
         return <Redirect to={this.state.redirect} />
@@ -249,7 +281,8 @@ onDeleteAccount(username){
                     </li>                
                     ))}
                     {console.log(this.state.answers)}
-                    {this.state.answers.map(answer => (
+
+                    {/* {this.state.answers.map(answer => (
                     <li className="list-group-item" key={answer.answer_id}>
                       <div className="row">
                         <div className="col-xs-10 col-md-11">
@@ -272,8 +305,12 @@ onDeleteAccount(username){
                         </div>
                       </div>
                     </li>                
-                    ))}
+                    ))} */}
                   </ul>
+                </div>
+
+                <div className="container" style={{ width: "80vw", paddingTop: "3em" }}>
+                    {hiddenAnswers}
                 </div>
               </div>   
                 
