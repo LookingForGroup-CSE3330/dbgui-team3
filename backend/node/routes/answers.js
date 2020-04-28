@@ -19,7 +19,7 @@ router.get('/answers/get/:post_id', (req, res) => {
 })
 
 //get all answers for a given user
-router.get('/answers/get/:user_id',(req, res) => {
+router.get('/answers/get-byname/:user_id',(req, res) => {
     var user_id = req.param('user_id')
     connection.query('select * from db.answers where answers.user_id = ?', user_id, (err, result, fields) => {
         if(err) throw err
@@ -58,6 +58,16 @@ router.put('/answers/update_downvotes/:answer_id', (req, res) => {
     var answerid = req.param('answer_id')
 
     connection.query('update db.answers SET down_votes = down_votes + 1 where answer_id = ?', answerid, (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
+//delete answer
+router.delete('/answers/delete/:answer_id', (req, res) => {
+    var answerid = req.param('answer_id')
+
+    connection.query('delete from db.answers where answer_id = ?', answerid, (err, result, fields) => {
         if(err) throw err
         res.send(JSON.stringify(result))
     })
