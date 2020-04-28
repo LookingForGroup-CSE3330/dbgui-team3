@@ -27,14 +27,17 @@ export class AccountPage extends React.Component {
 componentDidMount(){
 
   console.log('userid: ' + localStorage.getItem('currentId'));
-  if(localStorage.getItem('role')){
+  if(localStorage.getItem('role') != ""){
     this.answerRepository.getUsersAnswers(localStorage.getItem('currentId'))
     .then(result => {
       this.setState({answers: result});
       console.log("ANSWERS");
       console.log(result);
-      this.setState({showAns: ! this.state.showAns})
+      this.setState({showAns: true})
     })
+  }
+  else {
+    this.setState({showAns: false});
   }
 
   let username = this.props.match.params.username;

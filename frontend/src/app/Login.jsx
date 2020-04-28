@@ -40,8 +40,7 @@ export class Login extends React.Component{
             console.log("I RAN")
             this.setState({account: result[0]})
             console.log(this.state.account);
-            localStorage.setItem('currentId', this.state.account.usr_id);
-            localStorage.setItem('role', this.state.account.credentials);
+            localStorage.setItem('currentId', this.state.account.usr_id); 
         })
 
     }
@@ -49,8 +48,12 @@ export class Login extends React.Component{
     componentWillUnmount(){
         if(localStorage.getItem('visit')){
             console.log(this.state.account)
-            localStorage.setItem('role', this.state.account.credentials)
             localStorage.setItem('currentId', this.state.account.usr_id)
+            if(this.state.account.credentials != null){
+                localStorage.setItem('role', this.state.account.credentials);
+            } else {
+                localStorage.setItem('role', "");
+            }
         }
     }
 
