@@ -27,6 +27,7 @@ export class CreateQuestion extends React.Component {
           this.setState({account: result});
         });
         if(localStorage.getItem('role')){
+            alert("Doctors cannot ask questions")
             this.setState({redirect: '/'})
         }
     }

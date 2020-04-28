@@ -40,6 +40,7 @@ export class SignUp extends React.Component{
         this.accountRepo.signUp(accountInfo)
             .then(x => {
                 this.accountRepo.postUserRole(this.state.username, role)
+                localStorage.setItem('visit', 1);
                 this.setState({redirect: '/login'})
             })
     }
@@ -47,7 +48,7 @@ export class SignUp extends React.Component{
     render(){
         const hiddenStuff = this.state.checked
            ? <div className="form-group" id="credBox">
-                <label htmlFor="credInput">Credentials</label>
+                <label htmlFor="credInput">Credentials (Required)</label>
                 <input 
                     type="text"
                     name="credInput"
