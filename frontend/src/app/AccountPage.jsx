@@ -94,12 +94,14 @@ onEditAbout(about_me){
   }
 }
 
-onDeleteQuestion(){
-
+onDeleteQuestion(post_id){
+  if(window.confirm("Are you sure you want to delete this post?")){
+    this.questionRepository.deletePost(post_id);
+  }
 }
 
 onDeleteAnswer(ans_id){
-  if(window.confirm("Are you sure you want to this answer to a question?")){
+  if(window.confirm("Are you sure you want to delete this answer to a question?")){
     this.answerRepository.deleteAnswer(ans_id);
   }
 }
@@ -218,7 +220,7 @@ onDeleteAccount(username){
                     className="btn btn-danger"
                     title="RmvQ"
                     style={{float: 'right'}}
-                    onClick={() => this.onDeleteQuestion()}
+                    onClick={() => this.onDeleteQuestion(post.post_id)}
                   >
                     <span className="glyphicon glyphicon-pencil" />Remove
                 </button>

@@ -74,4 +74,15 @@ export class QuestionRepository{
             })
         })      
     }
+
+    deletePost(post_id){
+        return new Promise((resolve, reject) => {
+            axios.delete(`${this.url}/posts/delete/${post_id}`)
+            .then(x => resolve(x.data))
+            .catch(x => {
+                alert(x);
+                reject(x);
+            })
+        })
+    }
 }
