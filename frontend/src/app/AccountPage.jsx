@@ -118,7 +118,7 @@ onDeleteAccount(username){
          />
         <button
           type="button"
-          className="btn btn-success btn-xs"
+          className="btn btn-success btn-xs form-control mt-2"
           title="Edit"
           onClick={() => this.onEditEmail(this.state.newEmail)}
         >
@@ -141,7 +141,7 @@ onDeleteAccount(username){
           />
           <button
             type="button"
-            className="btn btn-success btn-xs"
+            className="btn btn-success btn-xs mt-2"
             title="Edit"
             onClick={() => this.onEditAbout(this.state.newAbout)}
           >
