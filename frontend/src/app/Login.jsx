@@ -25,6 +25,7 @@ export class Login extends React.Component{
             })
             
         localStorage.setItem('username', this.state.userName); 
+
         
         window.location.reload(true);
         
@@ -38,6 +39,8 @@ export class Login extends React.Component{
         .then(result => {
             console.log("I RAN")
             this.setState({account: result[0]})
+            console.log(this.state.account);
+            localStorage.setItem('currentId', this.state.account.usr_id); 
         })
 
     }
@@ -45,8 +48,13 @@ export class Login extends React.Component{
     componentWillUnmount(){
         if(localStorage.getItem('visit')){
             console.log(this.state.account)
-            localStorage.setItem('role', this.state.account.credentials)
-            localStorage.setItem('currentid', this.state.account.usr_id)
+            localStorage.setItem('currentId', this.state.account.usr_id)
+            if(this.state.account.credentials != null){
+                localStorage.setItem('role', this.state.account.credentials);
+            } else {
+                localStorage.setItem('role', "");
+            }
+            localStorage.setItem('loggedin', "yes");
         }
     }
 
