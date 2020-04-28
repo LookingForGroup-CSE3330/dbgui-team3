@@ -25,13 +25,14 @@ export class AccountPage extends React.Component {
 
 componentDidMount(){
 
+  console.log('userid: ' + localStorage.getItem('currentId'));
   if(localStorage.getItem('role')){
-    this.answerRepository.getUsersAnswers(localStorage.getItem('currentid'))
+    this.answerRepository.getUsersAnswers(localStorage.getItem('currentId'))
     .then(result => {
       this.setState({answers: result});
       console.log("ANSWERS");
       console.log(result);
-      console.log(localStorage.getItem('currentid'))
+      console.log(localStorage.getItem('currentId'))
     })
   }
 
@@ -104,6 +105,7 @@ onDeleteAccount(username){
 
 
   render() {
+    // For editing your email
     const hiddenEmail = this.state.editEmail
     ? <div className="form-group" id="credBox">
          <label htmlFor="credInput1">New Email</label>
@@ -127,6 +129,7 @@ onDeleteAccount(username){
      </div> 
      : null;
 
+     // For editing About me section
      const hiddenAbout = this.state.editAbout
      ? <div className="form-group" id="credBox">
           <label htmlFor="credInput2">New About</label>

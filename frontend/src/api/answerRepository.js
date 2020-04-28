@@ -16,7 +16,7 @@ export class AnswerRepository{
 
     getUsersAnswers(user_id){
         return new Promise((resolve, reject) =>{
-            axios.get(`${this.url}/answers/get/${user_id}`)
+            axios.get(`${this.url}/answers/get-byname/${user_id}`)
             .then(x => resolve(x.data))
             .catch(x => {
                 alert(x);

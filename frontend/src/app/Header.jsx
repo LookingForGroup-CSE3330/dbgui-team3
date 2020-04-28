@@ -17,6 +17,8 @@ export class Header extends React.Component {
 
     onLogout(){
         localStorage.setItem('username', ""); 
+        localStorage.setItem('currentId', "")
+        localStorage.setItem('role', "");
         window.location.reload(true);
     }
 
