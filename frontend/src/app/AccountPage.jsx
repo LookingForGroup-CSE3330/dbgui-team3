@@ -3,7 +3,8 @@ import React from "react";
 import {AccountRepository} from './../api/accountRepository';
 import { QuestionRepository } from "../api/questionRepository";
 import { AnswerRepository } from "../api/answerRepository";
-import {BrowserRouter as Link, Redirect} from 'react-router-dom';
+import {BrowserRouter as Redirect} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export class AccountPage extends React.Component {
   accountRepository = new AccountRepository();
@@ -16,6 +17,7 @@ export class AccountPage extends React.Component {
     editEmail: false,
     editAbout: false,
     showAns: false,
+    showQs: true,
     newEmail: "",
     newAbout: "",
     answers: []
@@ -34,10 +36,12 @@ componentDidMount(){
       console.log("ANSWERS");
       console.log(result);
       this.setState({showAns: true})
+      this.setState({showQs: false});
     })
   }
   else {
     this.setState({showAns: false});
+    this.setState({showQs: true});
   }
 
   let username = this.props.match.params.username;
@@ -157,6 +161,7 @@ onDeleteAccount(username){
       </div> 
       : null;
 
+      // For showing list of answers on doctor's profile only
       const hiddenAnswers = this.state.showAns
       ? <ul className="list-group">
           <li className="list-group-item text-center">
@@ -172,7 +177,7 @@ onDeleteAccount(username){
                     </h4>
                 </div>
                 <p>{answer.date}</p>
-                <Link className="btn btn-link"  to={'../answers/' + answer.post_id}>View Answer(s)</Link>
+                <Link to={'/answers/' + answer.post_id} >View Question</Link>
                   <button
                     type="button"
                     className="btn btn-danger"
@@ -188,6 +193,40 @@ onDeleteAccount(username){
         ))}
       </ul>
       : null;
+
+      // For showing list of asked questions on user profile only
+      const hiddenQuestions = this.state.showQs
+      ? <ul className="list-group">
+          <li className="list-group-item text-center">
+            <p style={{ fontWeight: "bold" }}>My Questions</p>
+          </li>
+          {this.state.posts.map(post => (
+            <li className="list-group-item" key={post.post_id}>
+              <div className="row">
+                <div className="col-xs-10 col-md-11">
+                  <div>
+                    <h4>
+                      {post.question}
+                    </h4>
+                  </div>
+                  <p>{post.creation_date}</p>
+                  <Link className="btn btn-link"  to={'../answers/' + post.post_id}>View Answer(s)</Link>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    title="RmvQ"
+                    style={{float: 'right'}}
+                    onClick={() => this.onDeleteQuestion()}
+                  >
+                    <span className="glyphicon glyphicon-pencil" />Remove
+                </button>
+              </div>
+            </div>
+          </li>                
+        ))}
+    </ul>
+    : null;
+
 
       if(this.state.redirect) {
         return <Redirect to={this.state.redirect} />
@@ -251,69 +290,9 @@ onDeleteAccount(username){
                   </ul>
                 </div>
                 {/*Comments*/}
-                <div
-                  className="container"
-                  style={{ width: "80vw", paddingTop: "3em" }}
-                >
-                  <ul className="list-group">
-                    <li className="list-group-item text-center">
-                      <p style={{ fontWeight: "bold" }}>My Questions</p>
-                    </li>
-                    {this.state.posts.map(post => (
-                    <li className="list-group-item" key={post.post_id}>
-                      <div className="row">
-                        <div className="col-xs-10 col-md-11">
-                          <div>
-                            <h4>
-                              {post.question}
-                            </h4>
-                          </div>
-                          <p>{post.creation_date}</p>
-                          <Link className="btn btn-link"  to={'../answers/' + post.post_id}>View Answer(s)</Link>
-                          <button
-                          type="button"
-                          className="btn btn-danger"
-                          title="RmvQ"
-                          style={{float: 'right'}}
-                          onClick={() => this.onDeleteQuestion()}
-                           >
-                            <span className="glyphicon glyphicon-pencil" />Remove
-                          </button>
-                        </div>
-                      </div>
-                    </li>                
-                    ))}
-                    {console.log(this.state.answers)}
-
-                    {/* {this.state.answers.map(answer => (
-                    <li className="list-group-item" key={answer.answer_id}>
-                      <div className="row">
-                        <div className="col-xs-10 col-md-11">
-                          <div>
-                            <h4>
-                              {answer.answer}
-                            </h4>
-                          </div>
-                          <p>{answer.date}</p>
-                          <Link className="btn btn-link"  to={'../answers/' + answer.post_id}>View Answer(s)</Link>
-                          <button
-                          type="button"
-                          className="btn btn-danger"
-                          title="RmvQ"
-                          style={{float: 'right'}}
-                          onClick={() => this.onDeleteAnswer()}
-                           >
-                            <span className="glyphicon glyphicon-pencil" />Remove
-                          </button>
-                        </div>
-                      </div>
-                    </li>                
-                    ))} */}
-                  </ul>
-                </div>
-
                 <div className="container" style={{ width: "80vw", paddingTop: "3em" }}>
-                    {hiddenAnswers}
+                      {hiddenQuestions}
+                      {hiddenAnswers}
                 </div>
               </div>   
                 
@@ -321,42 +300,3 @@ onDeleteAccount(username){
     );
   }
 }
-
-/*
-            <div
-            className="container"
-            style={{ width: "80vw", paddingTop: "3em" }}
-            >
-                  <ul className="list-group">
-                    <li className="list-group-item text-center">
-                      <p style={{ fontWeight: "bold" }}>My Questions</p>
-                    </li>
-                    {this.state.answers.map(answer => (
-                    <li className="list-group-item" key={post.post_id}>
-                      <div className="row">
-                        <div className="col-xs-10 col-md-11">
-                          <div>
-                            <h4>
-                              {answer.answer}
-                            </h4>
-                          </div>
-                          <p>{answer.date}</p>
-                          <Link className="btn btn-link"  to={'../answers/' + answer.post_id}>View Answer(s)</Link>
-                          <button
-                          type="button"
-                          className="btn btn-danger"
-                          title="RmvQ"
-                          style={{float: 'right'}}
-                          onClick={() => this.onDeleteAnswer()}
-                           >
-                            <span className="glyphicon glyphicon-pencil" />Remove
-                          </button>
-                        </div>
-                      </div>
-                    </li>                
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              */
