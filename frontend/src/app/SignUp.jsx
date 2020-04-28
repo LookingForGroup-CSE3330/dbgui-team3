@@ -40,6 +40,7 @@ export class SignUp extends React.Component{
         this.accountRepo.signUp(accountInfo)
             .then(x => {
                 this.accountRepo.postUserRole(this.state.username, role)
+                localStorage.setItem('visit', 1);
                 this.setState({redirect: '/login'})
             })
     }
