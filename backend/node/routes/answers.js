@@ -45,6 +45,15 @@ router.get('/answers/get_byuser_sort/:user_id', (req, res) => {
     })
 })
 
+//Search for an answer by keywords
+router.get('/answers/search/:key', (req, res) => {
+    var keyword = req.param('key')
+    connection.query('select * from db.answers where answer LIKE CONCAT("%", ?, "%")', keyword, (err, result) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
 //POST
 router.post('/answers/post/post_answer', (req, res) => {
     var answer = {
