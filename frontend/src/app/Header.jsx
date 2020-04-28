@@ -19,6 +19,7 @@ export class Header extends React.Component {
         localStorage.setItem('username', ""); 
         localStorage.setItem('currentId', "")
         localStorage.setItem('role', "");
+        localStorage.setItem('loggedin', "no");
         window.location.reload(true);
     }
 

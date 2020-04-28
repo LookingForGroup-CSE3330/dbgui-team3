@@ -54,6 +54,7 @@ export class Login extends React.Component{
             } else {
                 localStorage.setItem('role', "");
             }
+            localStorage.setItem('loggedin', "yes");
         }
     }
 

@@ -231,6 +231,14 @@ onDeleteAccount(username){
     </ul>
     : null;
 
+    const hiddenCredentials = this.state.showAns
+    ? 
+      <ul className="list-group list-group-flush" style={{padding: '2em'}}>
+        <li className="list-group-item">Credentials</li>
+        <li className="list-group-item">{localStorage.getItem('role')}</li>
+      </ul>
+    : null;
+
 
       if(this.state.redirect) {
         return <Redirect to={this.state.redirect} />
@@ -280,6 +288,11 @@ onDeleteAccount(username){
                         />
                     </div>
                     {hiddenEmail}
+                    <ul className="list-group list-group-flush">
+                    <li className="list-group-item">
+                    {hiddenCredentials}
+                    </li>
+                    </ul>
                     <button
                         type="button"
                         className="btn btn-danger"
