@@ -247,12 +247,6 @@ onDeleteAccount(username){
     return (
       <>     
       {/*Profile Part */}
-      <div className="container-fluid">
-                <div
-                  className="container"
-                  style={{ width: "20vw", float: "left", paddingTop: "3em" }}
-                >
-                  <ul className="list-group">
                     <li className="list-group-item text-center">
                       <p style={{ fontWeight: "bold" }}>My Profile</p>
                     </li>
@@ -276,6 +270,33 @@ onDeleteAccount(username){
                     {hiddenAbout}
                       </div>
                       <ul className="list-group list-group-flush">
+      <div className="container-fluid clearfix">
+        <div className="container" style={{ width: "20vw", float: "left", paddingTop: "3em" }}>
+          <ul className="list-group">
+            <li className="list-group-item text-center">
+              <h3>My Profile</h3>
+            </li>
+            {this.state.account.map(account => (
+              // <li className="list-group-item" style={{ height: "80vh" }} key={account.usr_id}>
+              <li className="list-group-item" key={account.usr_id}>
+                <div className="card-body">
+                  <h5 className="card-title">{account.username}</h5>
+                  <p className="card-text">
+                    {account.about_me}
+                  </p>
+                  <div className="form-check">
+                    <label htmlFor="editA" className="form-check-label">Edit About</label>&nbsp;
+                    <input 
+                      type="checkbox"
+                      id="editA"
+                      name="editA"
+                      checked={this.state.editAbout}
+                      onChange={this.handleAboutCheck}
+                    />
+                  </div>
+                  {hiddenAbout}
+                </div>
+                <ul className="list-group list-group-flush">
                         <li className="list-group-item">{account.email}</li>
                       </ul>
                       <div className="form-check">
