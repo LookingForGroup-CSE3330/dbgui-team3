@@ -56,74 +56,66 @@ export class HomePage extends React.Component {
 
   render() {
     return (
-      <>
-        <div className="container-fluid">
-          {/*Comments*/}
-          <div
-            className="container-fluid"
-            style={{ width: "99vw", paddingTop: "3em" }}
-          >
-            <ul className="list-group">
-              <li className="list-group-item text-center">
-                <p style={{ fontWeight: "bold", fontSize: '2em'}}>Site Questions</p>
-                <div className="dropdown clearfix">
-                  <button
-                    className="btn btn-secondary dropdown-toggle float-right"
-                    type="button"
-                    id="sortDropdownMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                  >
-                    Sort By
-                  </button>
-                  <div className="dropdown-menu" aria-labelledby="sortDropdowMenuButton">
-                    <button 
-                      className="dropdown-item" 
+    <>
+      <div className="container-fluid" style={{ width: "99vw", paddingTop: "3em" }}>
+        <ul className="list-group">
+          <li className="list-group-item text-center">
+            <p style={{ fontWeight: "bold", fontSize: '2em'}}>Site Questions</p>
+            <div className="dropdown clearfix">
+              <button
+                className="btn btn-secondary dropdown-toggle float-right"
+                type="button"
+                id="sortDropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+              >
+                Sort By
+              </button>
+              <div className="dropdown-menu" aria-labelledby="sortDropdowMenuButton">
+                <button 
+                  className="dropdown-item" 
+                  type="button"
+                  onClick={() => this.handleDateSort()}
+                >
+                  Recent
+                </button>
+                <button 
+                  className="dropdown-item" 
+                  type="button"
+                  onClick={() => this.handleVoteSort()}
+                >
+                  Vote Count
+                </button>
+              </div>
+            </div>
+          </li>
+          {this.state.posts.map(post => (
+            <li className="list-group-item" key={post.post_id}>
+              <div className="row">
+                <div className="col-xs-10 col-md-11">
+                  <div>
+                    <h4>
+                      {post.question}
+                    </h4>
+                  </div>
+                  <p>{post.creation_date}</p>
+                  <div className="action">
+                    <button
                       type="button"
-                      onClick={() => this.handleDateSort()}
+                      className="btn btn-success btn-xs"
+                      title="Edit"
+                      onClick={() => this.onUpvote(post.post_id, post.user_id)}
                     >
-                      Recent
-                    </button>
-                    <button 
-                      className="dropdown-item" 
-                      type="button"
-                      onClick={() => this.handleVoteSort()}
-                    >
-                      Vote Count
+                      {post.up_votes}
                     </button>
                   </div>
+                  <Link className="btn btn-link"  to={'answers/' + post.post_id}>View Answer(s)</Link>
                 </div>
-              </li>
-              {this.state.posts.map(post => (
-                <li className="list-group-item" key={post.post_id}>
-                  <div className="row">
-                    <div className="col-xs-10 col-md-11">
-                      <div>
-                        <h4>
-                          {post.question}
-                        </h4>
-                      </div>
-                      <p>{post.creation_date}</p>
-                      <div className="action">
-                        <button
-                          type="button"
-                          className="btn btn-success btn-xs"
-                          title="Edit"
-                          onClick={() => this.onUpvote(post.post_id, post.user_id)}
-                        >
-                        {post.up_votes}
-                        </button>
-                      </div>
-               
-                      <Link className="btn btn-link"  to={'answers/' + post.post_id}>View Answer(s)</Link>
-                    </div>
-                  </div>
-                </li>                
-              ))}
-            </ul>
-          </div>
-        </div>
-      </>
-    );
+              </div>
+            </li>                
+          ))}
+        </ul>
+      </div>
+    </>);
   }
 }
