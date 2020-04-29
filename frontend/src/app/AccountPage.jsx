@@ -87,7 +87,7 @@ onEditAbout(about_me){
   if(about_me.length >= 5){
     let username = this.props.match.params.username;
     this.accountRepository.updateAbout(username, about_me)
-    this.setState({redirect: '/login'})
+    //
   }
   else{
     alert("About Me is too short!")
@@ -109,6 +109,7 @@ onDeleteAnswer(ans_id){
 onDeleteAccount(username){
   if(window.confirm("Are you sure you want to delete your account?")){
     this.accountRepository.deleteUser(username);
+    this.setState({redirect: '/login'})
   }
   else{
     console.log("Account not deleted.");

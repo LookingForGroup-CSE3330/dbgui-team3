@@ -119,7 +119,7 @@ export class AccountRepository{
 
     deleteUser(username){
         return new Promise((resolve, reject) => {
-            axios.delete(`${this.url}/users/${username}/delete`)
+            axios.delete(`${this.url}/users/delete/${username}`)
                 .then(x => resolve(x.data))
                 .catch(x => {
                     alert(x);
