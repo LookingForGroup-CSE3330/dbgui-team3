@@ -171,14 +171,13 @@ router.post('/users/login/', (req, res) => {
 })
 
 //Delete a user
-router.delete('/users/:username/delete', async (req, res) => {
-  let sql = `DELETE FROM db.users WHERE db.username = ${req.params.username}`;
-  console.log(sql);
-    connection.query(sql,function (err, result, fields) {
-        if (err)
-            return console.error(error.message);
-        res.end(JSON.stringify(result));
-      })
+router.delete('/users/delete/:username', (req, res) => {
+    var username = req.param('username')
+
+    connection.query(`DELETE FROM db.users WHERE username = ?`, username, (err, result, fields) => {
+        if (err) throw err
+        res.send(JSON.stringify(result));
+    })
 })
 
 

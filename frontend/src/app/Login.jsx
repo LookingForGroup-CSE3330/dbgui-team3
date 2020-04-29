@@ -25,22 +25,16 @@ export class Login extends React.Component{
             })
             
         localStorage.setItem('username', this.state.userName); 
-
-        
-        window.location.reload(true);
-        
-
-        
+        window.location.reload(true); 
     }
 
-    componentDidMount(){
-
+    componentDidMount(){   
         this.accountRepo.getAccount(localStorage.getItem('username'))
         .then(result => {
             console.log("I RAN")
             this.setState({account: result[0]})
             console.log(this.state.account);
-            localStorage.setItem('currentId', this.state.account.usr_id); 
+            //localStorage.setItem('currentId', this.state.account.usr_id); 
         })
 
     }

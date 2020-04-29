@@ -9,6 +9,22 @@ router.get('/posts/get', (req, res) => {
     })
 })
 
+//get posts sorted by votes
+router.get('/posts/getByVotes', (req, res) => {
+    connection.query('select * from db.posts order by posts.up_votes DESC', (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
+//get posts sorted by date
+router.get('/posts/getByDate', (req, res) => {
+    connection.query(`select * from db.posts order by (str_to_date(posts.creation_date, '%m/%d/%Y')) DESC`, (err, result, fields) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
 //get list of posts that a given user has asked.
 router.get('/posts/get/:username', (req, res) => {
     var user_name = req.param('username')
