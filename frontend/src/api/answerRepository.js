@@ -47,9 +47,20 @@ export class AnswerRepository{
         })
     }
 
-    getAnswersForQuestionSorted(post_id){
+    getAnswersForQuestionSortedVote(post_id){
         return new Promise((resolve, reject) => {
-            axios.get(`${this.url}/answers/get_bypost_sort/${post_id}`)
+            axios.get(`${this.url}/answers/get_bypost_vote/${post_id}`)
+            .then(x => resolve(x.data))
+            .catch(x => {
+                alert(x);
+                reject(x);
+            })
+        })
+    }
+
+    getAnswersForQuestionSortedDate(post_id){
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/answers/get_bypost_date/${post_id}`)
             .then(x => resolve(x.data))
             .catch(x => {
                 alert(x);

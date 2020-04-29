@@ -28,9 +28,18 @@ router.get('/answers/get-byname/:user_id',(req, res) => {
 })
 
 //get all answers for a given question SORTED by votes
-router.get('/answers/get_bypost_sort/:post_id', (req, res) => {
+router.get('/answers/get_bypost_vote/:post_id', (req, res) => {
     var postid = req.param('post_id')
     connection.query('select * from db.answers where answers.post_id = ? order by answers.up_votes DESC', postid, (err, result) => {
+        if(err) throw err
+        res.send(JSON.stringify(result))
+    })
+})
+
+//get all answers for a given question sorted recent
+router.get('/answers/get_bypost_date/:post_id', (req, res) => {
+    var postid = req.param('post_id');
+    connection.query(`select * from db.answers where answers.post_id = ? ORDER BY str_to_date(answers.date, '%m/%d/%Y') DESC`, postid, (err, result, fields) => {
         if(err) throw err
         res.send(JSON.stringify(result))
     })

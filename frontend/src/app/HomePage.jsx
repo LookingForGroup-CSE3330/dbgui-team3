@@ -8,8 +8,6 @@ export class HomePage extends React.Component {
   state = {
     posts: [],
     username: "",
-    sortVotes: false,
-    sortDate: true
   };
 
   handleDateSort = this.handleDateSort.bind(this);
@@ -29,8 +27,6 @@ export class HomePage extends React.Component {
   }
 
   handleDateSort(){
-    this.setState({sortDate: true});
-    this.setState({sortVotes: false});
     this.questionRepository.getPostsSortedDate()
     .then(posts => {
       console.log("POSTS");
@@ -40,8 +36,6 @@ export class HomePage extends React.Component {
   }
 
   handleVoteSort(){
-    this.setState({sortVotes: true});
-    this.setState({sortDate: false});
     this.questionRepository.getPostsSortedVotes()
     .then(posts => {
       console.log("POSTS");
