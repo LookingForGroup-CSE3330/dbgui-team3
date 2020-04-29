@@ -14,6 +14,28 @@ export class QuestionRepository{
         })
     }
 
+    getPostsSortedVotes(){
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/posts/getByVotes`)
+            .then(x => resolve(x.data))
+            .catch(x => {
+                alert(x);
+                reject(x);
+            })
+        })
+    }
+
+    getPostsSortedDate(){
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/posts/getByDate`)
+            .then(x => resolve(x.data))
+            .catch(x => {
+                alert(x);
+                reject(x);
+            })
+        })
+    }
+
     getPost(username){
         return new Promise((resolve, reject) =>{
             axios.get(`${this.url}/posts/get/${username}`)
