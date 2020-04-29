@@ -44,7 +44,6 @@ export class HomePage extends React.Component {
     });
   }
 
-  //FIXME: lets you upvote unlimited times right now lol
   onUpvote(post_id, user_id_post){
     if(localStorage.getItem('loggedin') == "yes"){
       if(localStorage.getItem('currentId') != user_id_post){

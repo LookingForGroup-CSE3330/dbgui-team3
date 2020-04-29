@@ -52,6 +52,17 @@ export class AnswerPage extends React.Component {
       });
     }
 
+    onUpvote(answer_id, user_id_answer){
+      if(localStorage.getItem('loggedin') == 'yes'){
+        if(localStorage.getItem('currentId') != user_id_answer){
+          this.answerRepository.addVote(answer_id);
+          window.location.reload(true);
+        } else{
+          alert("You can not vote on your own answer!")
+        }
+      }
+    }
+
     render() {
         return (
         <>
@@ -109,6 +120,16 @@ export class AnswerPage extends React.Component {
                         </div>
                         <div className="action"></div>
                         <p>{answer.date}</p>
+                        <div className="action">
+                          <button 
+                            type="button"
+                            className="btn btn-success btn-xs"
+                            title="Edit"
+                            onClick={() => this.onUpvote(answer.answer_id, answer.user_id)}
+                          >
+                            {answer.up_votes}
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </li>                

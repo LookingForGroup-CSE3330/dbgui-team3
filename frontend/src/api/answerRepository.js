@@ -85,6 +85,17 @@ export class AnswerRepository{
         })       
     }
 
+    addVote(answer_id){
+        return new Promise((resolve, reject) => {
+            axios.put(`${this.url}/answers/update_upvotes/${answer_id}`)
+            .then(x => resolve(x.data))
+            .catch(x => {
+                alert(x);
+                reject(x);
+            })
+        })
+    }
+
     deleteAnswer(answer_id){
         return new Promise((resolve, reject) => {
             axios.delete(`${this.url}/answers/delete/${answer_id}`)
