@@ -12,6 +12,9 @@ export class HomePage extends React.Component {
     sortDate: true
   };
 
+  handleDateSort = this.handleDateSort.bind(this);
+  handleVoteSort = this.handleVoteSort.bind(this);
+
   questionRepository = new QuestionRepository();
   accountRepository = new AccountRepository();
   
@@ -23,6 +26,28 @@ export class HomePage extends React.Component {
       this.setState({posts});
     });
     
+  }
+
+  handleDateSort(){
+    this.setState({sortDate: true});
+    this.setState({sortVotes: false});
+    this.questionRepository.getPostsSortedDate()
+    .then(posts => {
+      console.log("POSTS");
+      console.log(posts);
+      this.setState({posts});
+    });
+  }
+
+  handleVoteSort(){
+    this.setState({sortVotes: true});
+    this.setState({sortDate: false});
+    this.questionRepository.getPostsSortedVotes()
+    .then(posts => {
+      console.log("POSTS");
+      console.log(posts);
+      this.setState({posts});
+    });
   }
 
   //FIXME: lets you upvote unlimited times right now lol
@@ -47,6 +72,33 @@ export class HomePage extends React.Component {
             <ul className="list-group">
               <li className="list-group-item text-center">
                 <p style={{ fontWeight: "bold", fontSize: '2em'}}>Site Questions</p>
+                <div className="dropdown clearfix">
+                  <button
+                    className="btn btn-secondary dropdown-toggle float-right"
+                    type="button"
+                    id="sortDropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                  >
+                    Sort By
+                  </button>
+                  <div className="dropdown-menu" aria-labelledby="sortDropdowMenuButton">
+                    <button 
+                      className="dropdown-item" 
+                      type="button"
+                      onClick={() => this.handleDateSort()}
+                    >
+                      Recent
+                    </button>
+                    <button 
+                      className="dropdown-item" 
+                      type="button"
+                      onClick={() => this.handleVoteSort()}
+                    >
+                      Vote Count
+                    </button>
+                  </div>
+                </div>
               </li>
               {this.state.posts.map(post => (
                 <li className="list-group-item" key={post.post_id}>
